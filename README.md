@@ -103,7 +103,3 @@ Try to install `mesa-common-dev`, `libgl1-mesa-dev` and `libglu1-mesa-dev`
 - GLEW [use guide](http://glew.sourceforge.net/basic.htm)
 - CMake [basic use](https://cmake.org/runningcmake/) and [tutorial](https://cmake.org/cmake-tutorial/)
 
-
-## OpenGL 3.3 examples
-The included OpenGL 3.3 examples will generate graphical output directly onto the screen using a window. Most of the examples rely on the included _ppgso_ library to provide simple abstraction classes such as ppgso::Window or ppgso::Texture. 
-# medieval-town-demo
