@@ -2,6 +2,11 @@
 
 This repository contains Medieval Town demo written in C++14 using OpenGL and GLSL.
 
+## Authors
+ - [Erik Matovič](https://github.com/Matovic)
+ - [Peter Oliver Kolek](https://github.com/pokolek)
+ - This repository is based on a course repository from [Principles of Computer Graphics and Image Processing](https://github.com/kapecp/ppgso)
+ 
 
 ## Installation instructions
 
