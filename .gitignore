@@ -1,0 +1,22 @@
+# ignore hidden files
+.*
+
+# except .gitignore file
+!.gitignore
+
+_*
+
+cmake-build*
+
+CMakeLists.txt.*
+
+data/raw*
+data/task*
+data/asteroid.*
+data/corsair.*
+data/cube.*
+data/lena.*
+data/missile.*
+data/quad.*
+data/sphere.*
+data/stars.*
