@@ -60,6 +60,8 @@ void SceneWindow::initScene() {
 
     // Add space background
     this->scene_.objects_.push_back(std::make_unique<Space>());
+
+    // Add towers
     auto tower = std::make_unique<Tower>();
     tower->position = {-5.0f, 0.0f, 0.0f};
     //tower->position.x -= 5.0f;
