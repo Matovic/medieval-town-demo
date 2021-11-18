@@ -7,8 +7,8 @@
 Space::Space() {
   // Initialize static resources if needed
   if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
-  if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("stars.bmp"));
-  if (!mesh) mesh = std::make_unique<ppgso::Mesh>("quad.obj");
+  if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("textures/sky.bmp"));
+  if (!mesh) mesh = std::make_unique<ppgso::Mesh>("objects/quad.obj");
 }
 
 bool Space::update(Scene &scene, float dt) {
