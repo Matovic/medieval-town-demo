@@ -1,7 +1,7 @@
 // Example gl_scene
 // - Introduces the concept of a dynamic scene of objects
 // - Uses abstract object interface for Update and Render steps
-// - Creates a simple game scene with Player, Asteroid and Space objects
+// - Creates a simple game scene with Player, Asteroid and Sky objects
 // - Contains a generator object that does not render but adds Asteroids to the scene
 // - Some objects use shared resources and all object deallocations are handled automatically
 // - Controls: LEFT, RIGHT, "R" to reset, SPACE to fire
@@ -59,7 +59,7 @@ void SceneWindow::initScene() {
     this->scene_.camera_ = move(camera);
 
     // Add space background
-    this->scene_.objects_.push_back(std::make_unique<Space>());
+    this->scene_.objects_.push_back(std::make_unique<Sky>());
     auto tower = std::make_unique<Tower>();
     tower->position = {-5.0f, 0.0f, 0.0f};
     //tower->position.x -= 5.0f;

@@ -4,14 +4,14 @@
 #include <shaders/texture_vert_glsl.h>
 #include <shaders/texture_frag_glsl.h>
 
-Space::Space() {
+Sky::Sky() {
   // Initialize static resources if needed
   if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
   if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("textures/sky.bmp"));
   if (!mesh) mesh = std::make_unique<ppgso::Mesh>("objects/quad.obj");
 }
 
-bool Space::update(Scene &scene, float dt) {
+bool Sky::update(Scene &scene, float dt) {
   // Offset for UV mapping, creates illusion of scrolling
   textureOffset.y -= dt/5;
 
@@ -21,7 +21,7 @@ bool Space::update(Scene &scene, float dt) {
   return true;
 }
 
-void Space::render(Scene &scene) {
+void Sky::render(Scene &scene) {
   // Disable writing to the depth buffer so we render a "background"
   // Do not need depth mask, because it is background, where we do not need depth,
   // background is always the most far away object in the scene
@@ -44,6 +44,6 @@ void Space::render(Scene &scene) {
 }
 
 // shared resources
-std::unique_ptr<ppgso::Mesh> Space::mesh;
-std::unique_ptr<ppgso::Shader> Space::shader;
-std::unique_ptr<ppgso::Texture> Space::texture;
+std::unique_ptr<ppgso::Mesh> Sky::mesh;
+std::unique_ptr<ppgso::Shader> Sky::shader;
+std::unique_ptr<ppgso::Texture> Sky::texture;

@@ -10,7 +10,7 @@
  * It does not use the camera so it uses different 2D shader program
  * Background animation is achieved by passing an offset to the fragment shader that offsets texture mapping
  */
-class Space final : public Object {
+class Sky final : public Object {
 private:
   // Static resources (Shared between instances)
   // every object needs mesh, shader to render and texture
@@ -22,9 +22,9 @@ private:
   glm::vec2 textureOffset;
 public:
   /*!
-   * Create new Space background
+   * Create new Sky background
    */
-  Space();
+  Sky();
 
   /*!
    * Update space background
