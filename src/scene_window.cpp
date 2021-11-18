@@ -17,7 +17,7 @@
 #include "scene.h"
 #include "generator.h"
 //#include "player.h"
-//#include "space.h"
+#include "space.h"
 
 #include "tower.h"
 
@@ -59,7 +59,7 @@ void SceneWindow::initScene() {
     this->scene_.camera_ = move(camera);
 
     // Add space background
-    //this->scene_.objects_.push_back(std::make_unique<Space>());
+    this->scene_.objects_.push_back(std::make_unique<Space>());
     auto tower = std::make_unique<Tower>();
     tower->position = {-5.0f, 0.0f, 0.0f};
     //tower->position.x -= 5.0f;
