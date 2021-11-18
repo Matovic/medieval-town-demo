@@ -1,4 +1,4 @@
-#include "space.h"
+#include "sky.h"
 #include "scene.h"
 
 #include <shaders/texture_vert_glsl.h>
@@ -31,7 +31,7 @@ void Space::render(Scene &scene) {
   shader->use();
 
   // Pass UV mapping offset to the shader
-  shader->setUniform("TextureOffset", textureOffset);
+  //shader->setUniform("TextureOffset", textureOffset);
 
   // Render mesh, not using any projections, we just render in 2D
   shader->setUniform("ModelMatrix", modelMatrix);

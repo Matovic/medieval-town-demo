@@ -114,7 +114,7 @@ add_executable(town
         src/explosion.cpp
         src/scene_window.cpp
         src/tower.cpp
-        src/space.cpp)
+        src/sky.cpp)
 target_link_libraries(town ppgso shaders)
 install(TARGETS town DESTINATION .)
 add_custom_command(TARGET town POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data/ ${CMAKE_CURRENT_BINARY_DIR})
