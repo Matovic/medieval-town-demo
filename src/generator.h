@@ -3,7 +3,7 @@
 #include "scene.h"
 
 /*!
- * Example generator of objects
+ * Example generator of objects, inherits from an Object class
  * Constructs a new object during Update and adds it into the scene
  * Does not render anything
  */
@@ -23,5 +23,5 @@ public:
    */
   void render(Scene &scene) override;
 
-  float time = 0.0f;
+  float time_ = 0.0f;
 };

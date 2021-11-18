@@ -16,11 +16,15 @@ bool Space::update(Scene &scene, float dt) {
   textureOffset.y -= dt/5;
 
   generateModelMatrix();
+
+  // background is always visible, therefore we do not return false only true
   return true;
 }
 
 void Space::render(Scene &scene) {
   // Disable writing to the depth buffer so we render a "background"
+  // Do not need depth mask, because it is background, where we do not need depth,
+  // background is always the most far away object in the scene
   glDepthMask(GL_FALSE);
 
   // NOTE: this object does not use camera, just renders the entire quad as is

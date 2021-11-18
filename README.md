@@ -7,6 +7,13 @@ This repository contains Medieval Town demo written in C++14 using OpenGL and GL
  - [Peter Oliver Kolek](https://github.com/pokolek)
  - This repository is based on a course repository from [Principles of Computer Graphics and Image Processing](https://github.com/kapecp/ppgso)
  
+## Data  
+
+Used free objects and textures in the project. Compressed if needed using [ImageMagick](https://imagemagick.org/index.php):
+
+```bash
+convert image-input.jpg -define bmp:format=bmp4 -compress none image-output.bmp
+```
 
 ## Installation instructions
 

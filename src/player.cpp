@@ -27,7 +27,7 @@ bool Player::update(Scene &scene, float dt) {
   fireDelay += dt;
 
   // Hit detection
-  for ( auto& obj : scene.objects ) {
+  for ( auto& obj : scene.objects_ ) {
     // Ignore self in scene
     if (obj.get() == this)
       continue;
@@ -41,7 +41,7 @@ bool Player::update(Scene &scene, float dt) {
       auto explosion = std::make_unique<Explosion>();
       explosion->position = position;
       explosion->scale = scale * 3.0f;
-      scene.objects.push_back(move(explosion));
+      scene.objects_.push_back(move(explosion));
 
       // Die
       return false;
@@ -49,10 +49,10 @@ bool Player::update(Scene &scene, float dt) {
   }
 
   // Keyboard controls
-  if(scene.keyboard[GLFW_KEY_LEFT]) {
+  if(scene.keyboard_[GLFW_KEY_LEFT]) {
     position.x += 10 * dt;
     rotation.z = -ppgso::PI/4.0f;
-  } else if(scene.keyboard[GLFW_KEY_RIGHT]) {
+  } else if(scene.keyboard_[GLFW_KEY_RIGHT]) {
     position.x -= 10 * dt;
     rotation.z = ppgso::PI/4.0f;
   } else {
@@ -60,7 +60,7 @@ bool Player::update(Scene &scene, float dt) {
   }
 
   // Firing projectiles
-  if(scene.keyboard[GLFW_KEY_SPACE] && fireDelay > fireRate) {
+  if(scene.keyboard_[GLFW_KEY_SPACE] && fireDelay > fireRate) {
     // Reset fire delay
     fireDelay = 0;
     // Invert file offset
@@ -68,7 +68,7 @@ bool Player::update(Scene &scene, float dt) {
 
     auto projectile = std::make_unique<Projectile>();
     projectile->position = position + glm::vec3(0.0f, 0.0f, 0.3f) + fireOffset;
-    scene.objects.push_back(move(projectile));
+    scene.objects_.push_back(move(projectile));
   }
 
   generateModelMatrix();
@@ -79,11 +79,11 @@ void Player::render(Scene &scene) {
   shader->use();
 
   // Set up light
-  shader->setUniform("LightDirection", scene.lightDirection);
+  shader->setUniform("LightDirection", scene.lightDirection_);
 
   // use camera
-  shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
-  shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
+  shader->setUniform("ProjectionMatrix", scene.camera_->projectionMatrix);
+  shader->setUniform("ViewMatrix", scene.camera_->viewMatrix);
 
   // render mesh
   shader->setUniform("ModelMatrix", modelMatrix);

@@ -5,6 +5,8 @@ uniform sampler2D Texture;
 // Direction of light
 uniform vec3 LightDirection;
 
+// TODO: Create vector of multiple light direction
+
 // (optional) Transparency
 uniform float Transparency;
 
@@ -23,6 +25,8 @@ out vec4 FragmentColor;
 void main() {
   // Compute diffuse lighting
   float diffuse = max(dot(normal, vec4(normalize(LightDirection), 1.0f)), 0.0f);
+  
+  // TODO: Compute multiple light direction
 
   // Lookup the color in Texture on coordinates given by texCoord
   // NOTE: Texture coordinate is inverted vertically for compatibility with OBJ

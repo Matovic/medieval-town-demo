@@ -12,11 +12,11 @@ private:
   static std::unique_ptr<ppgso::Mesh> mesh;
   static std::unique_ptr<ppgso::Texture> texture;
 
-  float age{0.0f};
-  float maxAge{0.2f};
-  glm::vec3 rotMomentum;
+  float age_{0.0f};
+  float maxAge_{0.2f};
+  glm::vec3 rotMomentum_;
 public:
-  glm::vec3 speed;
+  glm::vec3 speed_;
 
   /*!
    * Create new Explosion

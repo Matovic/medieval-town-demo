@@ -21,8 +21,8 @@ Asteroid::Asteroid() {
 
   // Initialize static resources if needed
   if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
-  if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("asteroid.bmp"));
-  if (!mesh) mesh = std::make_unique<ppgso::Mesh>("asteroid.obj");
+  if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("textures/tower.bmp"));//("textures/tower.bmp"));//("asteroid.bmp"));
+  if (!mesh) mesh = std::make_unique<ppgso::Mesh>("asteroid.obj");//("objects/tower.obj");
 }
 
 bool Asteroid::update(Scene &scene, float dt) {
@@ -39,7 +39,7 @@ bool Asteroid::update(Scene &scene, float dt) {
   if (age > 10.0f || position.y < -10) return false;
 
   // Collide with scene
-  for (auto &obj : scene.objects) {
+  for (auto &obj : scene.objects_) {
     // Ignore self in scene
     if (obj.get() == this) continue;
 
@@ -81,8 +81,8 @@ void Asteroid::explode(Scene &scene, glm::vec3 explosionPosition, glm::vec3 expl
   auto explosion = std::make_unique<Explosion>();
   explosion->position = explosionPosition;
   explosion->scale = explosionScale;
-  explosion->speed = speed / 2.0f;
-  scene.objects.push_back(move(explosion));
+  explosion->speed_ = speed / 2.0f;
+  scene.objects_.push_back(move(explosion));
 
   // Generate smaller asteroids
   for (int i = 0; i < pieces; i++) {
@@ -92,7 +92,7 @@ void Asteroid::explode(Scene &scene, glm::vec3 explosionPosition, glm::vec3 expl
     asteroid->rotMomentum = rotMomentum;
     float factor = (float) pieces / 2.0f;
     asteroid->scale = scale / factor;
-    scene.objects.push_back(move(asteroid));
+    scene.objects_.push_back(move(asteroid));
   }
 }
 
@@ -100,11 +100,11 @@ void Asteroid::render(Scene &scene) {
   shader->use();
 
   // Set up light
-  shader->setUniform("LightDirection", scene.lightDirection);
+  shader->setUniform("LightDirection", scene.lightDirection_);
 
   // use camera
-  shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
-  shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
+  shader->setUniform("ProjectionMatrix", scene.camera_->projectionMatrix);
+  shader->setUniform("ViewMatrix", scene.camera_->viewMatrix);
 
   // render mesh
   shader->setUniform("ModelMatrix", modelMatrix);

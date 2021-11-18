@@ -6,6 +6,9 @@
 
 #include "object.h"
 
+/*!
+ * Compute model matrix of an object by default order
+ */
 void Object::generateModelMatrix() {
   modelMatrix =
           glm::translate(glm::mat4(1.0f), position)

@@ -1,5 +1,5 @@
-#pragma once
-#include <memory>
+#ifndef TOWER_H
+#define TOWER_H
 
 #include <ppgso/ppgso.h>
 
@@ -12,7 +12,7 @@
  * It initializes and loads all resources only once
  * It will move down along the Y axis and self delete when reaching below -10
  */
-class Asteroid final : public Object {
+class Tower final : public Object {
 private:
   // Static resources (Shared between instances)
   // every object needs mesh, shader to render and texture
@@ -24,7 +24,7 @@ private:
   float age{0.0f};
 
   // Speed and rotational momentum
-  glm::vec3 speed;
+  //glm::vec3 speed;
   glm::vec3 rotMomentum;
 
   /*!
@@ -35,16 +35,16 @@ private:
    * @param explosionScale - Scale of the explosion
    * @param pieces - Asteroid pieces to generate
    */
-  void explode(Scene &scene, glm::vec3 explosionPosition, glm::vec3 explosionScale, int pieces);
+  //void explode(Scene &scene, glm::vec3 explosionPosition, glm::vec3 explosionScale, int pieces);
 
 public:
   /*!
    * Create new asteroid
    */
-  Asteroid();
+  Tower();
 
   /*!
-   * Update asteroid
+   * Update tower
    * @param scene Scene to interact with
    * @param dt Time delta for animation purposes
    * @return
@@ -52,7 +52,7 @@ public:
   bool update(Scene &scene, float dt) override;
 
   /*!
-   * Render asteroid
+   * Render tower
    * @param scene Scene to render in
    */
   void render(Scene &scene) override;
@@ -60,8 +60,11 @@ public:
   /*!
    * Custom click event for asteroid
    */
-  void onClick(Scene &scene) override;
+  //void onClick(Scene &scene) override;
 
 private:
 };
 
+
+
+#endif // TOWER_H

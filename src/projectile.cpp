@@ -44,11 +44,11 @@ void Projectile::render(Scene &scene) {
   shader->use();
 
   // Set up light
-  shader->setUniform("LightDirection", scene.lightDirection);
+  shader->setUniform("LightDirection", scene.lightDirection_);
 
   // use camera
-  shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
-  shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
+  shader->setUniform("ProjectionMatrix", scene.camera_->projectionMatrix);
+  shader->setUniform("ViewMatrix", scene.camera_->viewMatrix);
 
   // render mesh
   shader->setUniform("ModelMatrix", modelMatrix);

@@ -13,10 +13,12 @@
 class Space final : public Object {
 private:
   // Static resources (Shared between instances)
+  // every object needs mesh, shader to render and texture
   static std::unique_ptr<ppgso::Mesh> mesh;
   static std::unique_ptr<ppgso::Shader> shader;
   static std::unique_ptr<ppgso::Texture> texture;
 
+  // background moves, so we need to compute texture offset (illusion of moving)
   glm::vec2 textureOffset;
 public:
   /*!

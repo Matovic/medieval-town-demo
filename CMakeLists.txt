@@ -112,6 +112,8 @@ add_executable(town
         src/player.cpp
         src/projectile.cpp
         src/explosion.cpp
+        src/scene_window.cpp
+        src/tower.cpp
         src/space.cpp)
 target_link_libraries(town ppgso shaders)
 install(TARGETS town DESTINATION .)
