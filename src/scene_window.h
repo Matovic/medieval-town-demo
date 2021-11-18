@@ -4,7 +4,7 @@
 // Example gl_scene
 // - Introduces the concept of a dynamic scene of objects
 // - Uses abstract object interface for Update and Render steps
-// - Creates a simple game scene with Player, Asteroid and Space objects
+// - Creates a simple game scene with Player, Asteroid and Sky objects
 // - Contains a generator object that does not render but adds Asteroids to the scene
 // - Some objects use shared resources and all object deallocations are handled automatically
 // - Controls: LEFT, RIGHT, "R" to reset, SPACE to fire
