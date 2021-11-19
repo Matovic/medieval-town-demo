@@ -14,7 +14,7 @@ public:
   glm::vec3 up{0,1,0};
   glm::vec3 position{0,1.5,0};
   glm::vec3 back{0,0,-1};
-  glm::vec3 speed{0,0,0.04f};
+  glm::vec3 speed{0,0,2.0f};
 
   glm::mat4 viewMatrix;
   glm::mat4 projectionMatrix;
@@ -31,7 +31,7 @@ public:
   /*!
    * Update Camera viewMatrix based on up, position and back vectors
    */
-  void update();
+  void update(float dt);
 
   /*!
    * Get direction vector in world coordinates through camera projection plane

@@ -9,10 +9,16 @@ This repository contains Medieval Town demo written in C++14 using OpenGL and GL
  
 ## Data  
 
-Used free objects and textures in the project. Compressed if needed using [ImageMagick](https://imagemagick.org/index.php):
+We have used free objects in the OBJ file format and textures as BMP images with 24-bit depth. Compressed if needed using [ImageMagick](https://imagemagick.org/index.php):
 
 ```bash
 convert image-input.jpg -define bmp:format=bmp4 -compress none image-output.bmp
+```
+
+In case the output image is flipped, use:
+
+```bash
+convert image-input.jpg -flip -define bmp:format=bmp4 -compress none image-output.bmp
 ```
 
 ## Installation instructions

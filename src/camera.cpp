@@ -20,9 +20,9 @@ Camera::Camera(float fow, float ratio, float near, float far) {
 /*!
  * Update Camera viewMatrix based on up, position and back vectors
  */
-void Camera::update() {
+void Camera::update(float dt) {
     //if (position.z < -10)
-    this->position += this->speed;
+    this->position += this->speed * dt;
     /*else{
         this->position -= this->speed;
         std::cout <<"LA\n";

@@ -18,6 +18,7 @@
 #include "generator.h"
 //#include "player.h"
 #include "sky.h"
+#include "fountain.h"
 
 #include "tower.h"
 
@@ -71,6 +72,12 @@ void SceneWindow::initScene() {
     tower2->position = {5.0f, 0.0f, 0.0f};
     //tower2->position.x += 5.0f;
     this->scene_.objects_.push_back(move(tower2));
+
+    // Add fountain
+    auto fountain = std::make_unique<Fountain>();
+    fountain->position = {0.0f, 0.0f, 15.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(fountain));
 
     // Add generator to scene
     //auto generator = std::make_unique<Generator>();
