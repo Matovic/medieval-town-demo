@@ -21,6 +21,7 @@
 #include "fountain.h"
 
 #include "tower.h"
+#include "floor.h"
 
 /*!
 * Construct custom game window
@@ -61,6 +62,9 @@ void SceneWindow::initScene() {
 
     // Add space background
     this->scene_.objects_.push_back(std::make_unique<Sky>());
+
+    // Add floor
+    auto floor = std::make_unique<Floor>();
 
     // Add towers
     auto tower = std::make_unique<Tower>();
