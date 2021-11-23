@@ -1,3 +1,8 @@
+//#include <glm/gtc/random.hpp>
+//#include "asteroid.h"
+//#include "projectile.h"
+//#include "explosion.h"
+
 #include "floor.h"
 
 #include <shaders/diffuse_vert_glsl.h>
@@ -11,15 +16,15 @@ std::unique_ptr<ppgso::Shader> Floor::shader;
 
 Floor::Floor() {
     // Set random scale speed and rotation
-    this->scale *= 0.09f;
+    this->scale = {50.0f, 0.01f, 50.0f};
     //speed = {glm::linearRand(-2.0f, 2.0f), glm::linearRand(-5.0f, -10.0f), 0.0f};
-    this->rotation ={0.0f, 0.0f, 1.5f};
+    this->rotation ={0.0f, 0.0f, 0.0f};
     //this->rotMomentum = {0.0f, 0.0f, glm::linearRand(-ppgso::PI/4.0f, ppgso::PI/4.0f)};
 
     // Initialize static resources if needed
     if (!this->shader) this->shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
-    if (!this->texture) this->texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("textures/tower.bmp"));
-    if (!this->mesh) this->mesh = std::make_unique<ppgso::Mesh>("objects/tower.obj");
+    if (!this->texture) this->texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("textures/ground.bmp"));
+    if (!this->mesh) this->mesh = std::make_unique<ppgso::Mesh>("objects/cube.obj");
 }
 
 bool Floor::update(Scene &scene, float dt) {
@@ -90,5 +95,4 @@ void Floor::render(Scene &scene) {
     this->shader->setUniform("Texture", *texture);
     this->mesh->render();
 }
-
 

@@ -65,6 +65,9 @@ void SceneWindow::initScene() {
 
     // Add floor
     auto floor = std::make_unique<Floor>();
+    floor->position = {0.0f, 0.0f, 2.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(floor));
 
     // Add towers
     auto tower = std::make_unique<Tower>();

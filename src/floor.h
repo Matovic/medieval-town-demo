@@ -8,6 +8,10 @@
 
 #include "scene.h"
 #include "object.h"
+#include <ppgso/ppgso.h>
+
+#include "scene.h"
+#include "object.h"
 
 /*!
  * Simple asteroid object
@@ -67,7 +71,6 @@ public:
 
 private:
 };
-
 
 
 #endif //MEDIEVAL_TOWN_DEMO_FLOOR_H
