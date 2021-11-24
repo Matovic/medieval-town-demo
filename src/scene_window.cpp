@@ -22,6 +22,8 @@
 #include "fountain.h"
 #include "tower.h"
 #include "floor.h"
+#include "market.h"
+#include "house.h"
 
 /*!
 * Construct custom game window
@@ -87,6 +89,49 @@ void SceneWindow::initScene() {
     //tower->position.x -= 5.0f;
     this->scene_.objects_.push_back(move(fountain));
 
+    // Add markets
+    //auto market1 = std::make_unique<Market>();
+    //market1->position = {2.0f, 0.0f, 20.0f};
+    //tower->position.x -= 5.0f;
+    //this->scene_.objects_.push_back(move(market1));
+
+    // Add house
+    auto house1 = std::make_unique<House>();
+    house1->position = {-10.0f, 4.5f, 10.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(house1));
+
+    // Add house
+    auto house2 = std::make_unique<House>();
+    house2->position = {-10.0f, 4.5f, 15.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(house2));
+
+    // Add house
+    auto house3 = std::make_unique<House>();
+    house3->position = {-10.0f, 4.5f, 20.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(house3));
+
+    // Add house
+    auto house4 = std::make_unique<House>();
+    house4->position = {10.0f, 4.5f, 10.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(house4));
+
+    // Add house
+    auto house5 = std::make_unique<House>();
+    house5->position = {10.0f, 4.5f, 15.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(house5));
+
+    // Add house
+    auto house6 = std::make_unique<House>();
+    house6->position = {10.0f, 4.5f, 20.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(house6));
+
+
     // Add generator to scene
     //auto generator = std::make_unique<Generator>();
     //generator->position.y = 10.0f;
@@ -143,6 +188,42 @@ void SceneWindow::initSceneNight() {
     fountain->position = {0.0f, 0.0f, 15.0f};
     //tower->position.x -= 5.0f;
     this->scene_.objects_.push_back(move(fountain));
+
+    // Add house
+    auto house1 = std::make_unique<House>();
+    house1->position = {-10.0f, 4.5f, 10.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(house1));
+
+    // Add house
+    auto house2 = std::make_unique<House>();
+    house2->position = {-10.0f, 4.5f, 15.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(house2));
+
+    // Add house
+    auto house3 = std::make_unique<House>();
+    house3->position = {-10.0f, 4.5f, 20.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(house3));
+
+    // Add house
+    auto house4 = std::make_unique<House>();
+    house4->position = {10.0f, 4.5f, 10.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(house4));
+
+    // Add house
+    auto house5 = std::make_unique<House>();
+    house5->position = {10.0f, 4.5f, 15.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(house5));
+
+    // Add house
+    auto house6 = std::make_unique<House>();
+    house6->position = {10.0f, 4.5f, 20.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(house6));
 
     // Add generator to scene
     //auto generator = std::make_unique<Generator>();
