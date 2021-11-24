@@ -16,6 +16,7 @@
 #include <ppgso/ppgso.h>
 
 #include "scene.h"
+#include "scene_night.h"
 
 //const unsigned int SIZE = 1024;
 
@@ -58,9 +59,10 @@ public:
    * Window update implementation that will be called automatically from pollEvents
    */
   void onIdle() override;
-  
+
 private:
   Scene scene_;
+  //SceneNight sceneNight_;
   bool animate_ = true;
   //bool animate_ = false;
 
@@ -69,6 +71,12 @@ private:
    * Creating unique smart pointers to objects that are stored in the scene object list
    */
   void initScene();
+
+  /*!
+   * Reset and initialize the new scene
+   * Creating unique smart pointers to objects that are stored in the scene object list
+   */
+  void initSceneNight();
 };
 
 #endif // _PPGSO_SCENE_WINDOW_H

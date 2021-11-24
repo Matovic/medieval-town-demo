@@ -15,11 +15,11 @@
 #include "scene_window.h"
 #include "camera.h"
 #include "scene.h"
+#include "scene_night.h"
 #include "generator.h"
 //#include "player.h"
 #include "sky.h"
 #include "fountain.h"
-
 #include "tower.h"
 #include "floor.h"
 
@@ -65,20 +65,78 @@ void SceneWindow::initScene() {
 
     // Add floor
     auto floor = std::make_unique<Floor>();
-    floor->position = {0.0f, 0.0f, 2.0f};
-    //tower->position.x -= 5.0f;
+    floor->position = {0.0f, -0.01f, 2.0f};
     this->scene_.objects_.push_back(move(floor));
 
-    // Add towers
+
+    // Add tower
     auto tower = std::make_unique<Tower>();
     tower->position = {-5.0f, 0.0f, 0.0f};
-    //tower->position.x -= 5.0f;
+    tower->rotMomentum = {0.0f, 0.0f, -0.25f};
     this->scene_.objects_.push_back(move(tower));
 
-    auto tower2 = std::make_unique<Tower>();
-    tower2->position = {5.0f, 0.0f, 0.0f};
-    //tower2->position.x += 5.0f;
-    this->scene_.objects_.push_back(move(tower2));
+    // Add second tower
+    tower = std::make_unique<Tower>();
+    tower->position = {5.0f, 0.0f, 0.0f};
+    tower->rotMomentum = {0.0f, 0.0f, 0.25f};
+    this->scene_.objects_.push_back(move(tower));
+
+    // Add fountain
+    auto fountain = std::make_unique<Fountain>();
+    fountain->position = {0.0f, 0.0f, 15.0f};
+    //tower->position.x -= 5.0f;
+    this->scene_.objects_.push_back(move(fountain));
+
+    // Add generator to scene
+    //auto generator = std::make_unique<Generator>();
+    //generator->position.y = 10.0f;
+    //this->scene_.objects_.push_back(move(generator));
+
+    // Add player to the scene
+    //auto player = std::make_unique<Player>();
+    //player->position.y = -6;
+    //this->scene_.objects_.push_back(move(player));
+}
+
+/*!
+* Reset and initialize the game scene
+* Creating unique smart pointers to objects that are stored in the scene object list
+*/
+void SceneWindow::initSceneNight() {
+    // we no longer
+    this->scene_.secondScene_ = true;
+
+    // clear scene if it already was run
+    this->scene_.objects_.clear();
+
+    // Delete camera
+    //this->scene_.camera_.release();
+
+    // Create a camera
+    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
+    //camera->position.y = 1.5f;
+    camera->position.z = -15.0f;
+    this->scene_.camera_ = move(camera);
+
+    // Add background
+    this->scene_.objects_.push_back(std::make_unique<Sky>(false));
+
+    // Add floor
+    auto floor = std::make_unique<Floor>();
+    floor->position = {0.0f, -0.01f, 2.0f};
+    this->scene_.objects_.push_back(move(floor));
+
+    // Add tower
+    auto tower = std::make_unique<Tower>();
+    tower->position = {-5.0f, 0.0f, 0.0f};
+    tower->rotMomentum = {0.0f, 0.0f, -0.25f};
+    this->scene_.objects_.push_back(move(tower));
+
+    // Add second tower
+    tower = std::make_unique<Tower>();
+    tower->position = {5.0f, 0.0f, 0.0f};
+    tower->rotMomentum = {0.0f, 0.0f, 0.25f};
+    this->scene_.objects_.push_back(move(tower));
 
     // Add fountain
     auto fountain = std::make_unique<Fountain>();
@@ -178,6 +236,13 @@ void SceneWindow::onIdle() {
     glClearColor(.5f, .5f, .5f, 0);
     // Clear depth and color buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    if (!this->scene_.secondScene_ && this->scene_.camera_->position.z > 5)
+        this->scene_.firstScene_ = false;
+
+    // if we have to traisnition to second scene
+    if (!this->scene_.firstScene_ && !this->scene_.secondScene_)
+        this->initSceneNight();
 
     // Update and render all objects
     this->scene_.update(dt);

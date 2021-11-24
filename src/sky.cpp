@@ -4,16 +4,21 @@
 #include <shaders/texture_vert_glsl.h>
 #include <shaders/texture_frag_glsl.h>
 
-Sky::Sky() {
+Sky::Sky(const bool firstScene) {
+
+  // Reset texture if we change the scenes
+  if (texture && !firstScene) texture.reset();
+
   // Initialize static resources if needed
   if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
-  if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("textures/sky.bmp"));
+  if (!texture && firstScene) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("textures/sky.bmp"));
+  if (!texture && !firstScene) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("textures/sky_night.bmp"));
   if (!mesh) mesh = std::make_unique<ppgso::Mesh>("objects/quad.obj");
 }
 
 bool Sky::update(Scene &scene, float dt) {
   // Offset for UV mapping, creates illusion of scrolling
-  textureOffset.y -= dt/5;
+  //textureOffset.y -= dt/5;
 
   generateModelMatrix();
 

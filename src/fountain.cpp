@@ -17,7 +17,7 @@ std::unique_ptr<ppgso::Shader> Fountain::shader;
 Fountain::Fountain() {
   // Set random scale speed and rotation
   this->scale *= 0.09f;
-  //speed = {glm::linearRand(-2.0f, 2.0f), glm::linearRand(-5.0f, -10.0f), 0.0f};
+  //this->speed = {glm::linearRand(-2.0f, 2.0f), glm::linearRand(-5.0f, -10.0f), 0.0f};
   this->rotation ={0.0f, 0.0f, 1.5f};
   this->rotMomentum = {0.0f, 0.0f, glm::linearRand(-ppgso::PI/4.0f, ppgso::PI/4.0f)};
 
@@ -29,7 +29,7 @@ Fountain::Fountain() {
 
 bool Fountain::update(Scene &scene, float dt) {
   // Count time alive
-  this->age += dt;
+  //this->age += dt;
 
   // Animate position according to time
   //position += speed * dt;
@@ -38,9 +38,9 @@ bool Fountain::update(Scene &scene, float dt) {
   this->rotation += rotMomentum * dt;
 
   // Delete when alive longer than 10s or out of visibility
-  if (this->age > 10.0f || this->position.y < -10)
-      return false;
-
+  //if (this->age > 10.0f || this->position.y < -10)
+  //    return false;
+/*
   // Collide with scene
   for (auto &obj : scene.objects_) {
     // Ignore self in scene
@@ -73,7 +73,7 @@ bool Fountain::update(Scene &scene, float dt) {
       return false;
     }
   }
-
+*/
   // Generate modelMatrix from position, rotation and scale
   generateModelMatrix();
 

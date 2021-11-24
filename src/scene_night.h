@@ -1,5 +1,5 @@
-#ifndef _PPGSO_SCENE_H
-#define _PPGSO_SCENE_H
+#ifndef _PPGSO_SCENE_NIGHT_H
+#define _PPGSO_SCENE_NIGHT_H
 
 #include <memory>
 #include <map>
@@ -13,7 +13,7 @@
  * Objects are stored in a list of objects
  * Keyboard and Mouse states are stored in a map and struct
  */
-class Scene {
+class SceneNight {
   public:
     /*!
      * Update all objects in the scene
@@ -58,9 +58,7 @@ class Scene {
       double x, y;
       bool left, right;
     } cursor_;
-
-    bool firstScene_ = true;
-    bool secondScene_ = false;
 };
 
-#endif // _PPGSO_SCENE_H
+#endif // _PPGSO_SCENE_NIGHT_H
+

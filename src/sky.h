@@ -19,12 +19,13 @@ private:
   static std::unique_ptr<ppgso::Texture> texture;
 
   // background moves, so we need to compute texture offset (illusion of moving)
-  glm::vec2 textureOffset;
+  //glm::vec2 textureOffset;
 public:
   /*!
    * Create new Sky background
+   * @param firstScene boolean to determinate wgich texture to use
    */
-  Sky();
+  Sky(const bool firstScene=true);
 
   /*!
    * Update space background
