@@ -67,70 +67,56 @@ void SceneWindow::initScene() {
 
     // Add floor
     auto floor = std::make_unique<Floor>();
-    floor->position = {0.0f, -0.01f, 2.0f};
+    floor->position = {0.0f, -0.01f, 12.0f};
     this->scene_.objects_.push_back(move(floor));
 
+    float x_offset = 0.0f;
+    // add towers
+    for (unsigned int i = 0; i < 3; ++i, x_offset += 5.0f)
+    {
+        // Add tower from right side
+        auto tower = std::make_unique<Tower>();
+        tower->position = {-5.0f - x_offset, 0.0f, 0.0f};
+        tower->rotMomentum = {0.0f, 0.0f, -0.25f};
+        this->scene_.objects_.push_back(move(tower));
 
-    // Add tower
-    auto tower = std::make_unique<Tower>();
-    tower->position = {-5.0f, 0.0f, 0.0f};
-    tower->rotMomentum = {0.0f, 0.0f, -0.25f};
-    this->scene_.objects_.push_back(move(tower));
-
-    // Add second tower
-    tower = std::make_unique<Tower>();
-    tower->position = {5.0f, 0.0f, 0.0f};
-    tower->rotMomentum = {0.0f, 0.0f, 0.25f};
-    this->scene_.objects_.push_back(move(tower));
+        // Add tower from left side
+        tower = std::make_unique<Tower>();
+        tower->position = {5.0f + x_offset, 0.0f, 0.0f};
+        tower->rotMomentum = {0.0f, 0.0f, 0.25f};
+        this->scene_.objects_.push_back(move(tower));
+    }
 
     // Add fountain
     auto fountain = std::make_unique<Fountain>();
     fountain->position = {0.0f, 0.0f, 15.0f};
-    //tower->position.x -= 5.0f;
     this->scene_.objects_.push_back(move(fountain));
 
     // Add markets
-    //auto market1 = std::make_unique<Market>();
-    //market1->position = {2.0f, 0.0f, 20.0f};
-    //tower->position.x -= 5.0f;
-    //this->scene_.objects_.push_back(move(market1));
+    auto market1 = std::make_unique<Market>();
+    market1->position = {2.0f, 0.0f, 10.0f};
+    this->scene_.objects_.push_back(move(market1));
 
-    // Add house
-    auto house1 = std::make_unique<House>();
-    house1->position = {-10.0f, 4.5f, 10.0f};
-    //tower->position.x -= 5.0f;
-    this->scene_.objects_.push_back(move(house1));
+    // add houses
+    float z_offset = 0.0f;
+    for (unsigned int i = 0; i < 6; ++i, z_offset += 5.0f)
+    {
+        // add house on 1 side
+        auto house = std::make_unique<House>();
+        house->position = {-15.0f, 4.5f, 5.0f + z_offset};
+        this->scene_.objects_.push_back(move(house));
 
-    // Add house
-    auto house2 = std::make_unique<House>();
-    house2->position = {-10.0f, 4.5f, 15.0f};
-    //tower->position.x -= 5.0f;
-    this->scene_.objects_.push_back(move(house2));
+        // add house on the second side
+        house = std::make_unique<House>();
+        house->position = {15.0f, 4.5f, 5.0f + z_offset};
+        this->scene_.objects_.push_back(move(house));
 
-    // Add house
-    auto house3 = std::make_unique<House>();
-    house3->position = {-10.0f, 4.5f, 20.0f};
-    //tower->position.x -= 5.0f;
-    this->scene_.objects_.push_back(move(house3));
-
-    // Add house
-    auto house4 = std::make_unique<House>();
-    house4->position = {10.0f, 4.5f, 10.0f};
-    //tower->position.x -= 5.0f;
-    this->scene_.objects_.push_back(move(house4));
-
-    // Add house
-    auto house5 = std::make_unique<House>();
-    house5->position = {10.0f, 4.5f, 15.0f};
-    //tower->position.x -= 5.0f;
-    this->scene_.objects_.push_back(move(house5));
-
-    // Add house
-    auto house6 = std::make_unique<House>();
-    house6->position = {10.0f, 4.5f, 20.0f};
-    //tower->position.x -= 5.0f;
-    this->scene_.objects_.push_back(move(house6));
-
+        // add house on the back side
+        house = std::make_unique<House>();
+        house->position = {15.0f - (5.0f + z_offset), 4.5f, 35.0f};
+        house->rotation = {0.0f, 0.0f, 0.10f};
+        this->scene_.objects_.push_back(move(house));
+    }
 
     // Add generator to scene
     //auto generator = std::make_unique<Generator>();
@@ -255,6 +241,52 @@ void SceneWindow::onKey(int key, int scanCode, int action, int mods) {
     if (key == GLFW_KEY_P && action == GLFW_PRESS) {
       this->animate_ = !this->animate_;
     }
+
+    // move forward
+    if (key == GLFW_KEY_W) {
+      this->scene_.camera_->position.z += 5.0f * this->dt;
+    }
+
+    // move backwards
+    if (key == GLFW_KEY_S) {
+      this->scene_.camera_->position.z -= 5.0f * this->dt;
+    }
+
+    // move right
+    if (key == GLFW_KEY_D) {
+      this->scene_.camera_->position.x -= 5.0f * this->dt;
+    }
+
+    // move left
+    if (key == GLFW_KEY_A) {
+      this->scene_.camera_->position.x += 5.0f * this->dt;;
+    }
+
+    // move up
+    if (key == GLFW_KEY_SPACE) {
+      this->scene_.camera_->position.y += 5.0f * this->dt;
+    }
+
+    // move down
+    if (key == GLFW_KEY_X) {
+      this->scene_.camera_->position.y -= 5.0f * this->dt;;
+    }
+
+    // rotate left
+    if (key == GLFW_KEY_Q) {
+      this->scene_.camera_->rotation.x += std::sin(glm::radians(80.0f)) * this->dt;
+
+        /*
+direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+direction.y = sin(glm::radians(pitch));
+direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+*/
+    }
+
+    // rotate right
+    if (key == GLFW_KEY_E) {
+      this->scene_.camera_->rotation.x -= std::sin(glm::radians(80.0f)) * this->dt;
+    }
 }
 
 /*!
@@ -275,7 +307,9 @@ void SceneWindow::onCursorPos(double cursorX, double cursorY) {
 */
 void SceneWindow::onMouseButton(int button, int action, int mods) {
     if(button == GLFW_MOUSE_BUTTON_LEFT) {
-      this->scene_.cursor_.left = action == GLFW_PRESS;
+
+        this->scene_.camera_->rotation.y -= std::sin(glm::radians(80.0f)) * this->dt;
+      /*this->scene_.cursor_.left = action == GLFW_PRESS;
 
         if (this->scene_.cursor_.left) {
             // Convert pixel coordinates to Screen coordinates
@@ -294,10 +328,11 @@ void SceneWindow::onMouseButton(int button, int action, int mods) {
               // Pass on the click event
               obj->onClick(this->scene_);
             }
-        }
+        }*/
     }
     if(button == GLFW_MOUSE_BUTTON_RIGHT) {
-      this->scene_.cursor_.right = action == GLFW_PRESS;
+      //this->scene_.cursor_.right = action == GLFW_PRESS;
+        this->scene_.camera_->rotation.y += std::sin(glm::radians(80.0f)) * this->dt;
     }
 }
 
@@ -309,7 +344,7 @@ void SceneWindow::onIdle() {
     static auto time = (float) glfwGetTime();
 
     // Compute time delta based on bool variable animate
-    float dt = this->animate_ ? (float) glfwGetTime() - time : 0;
+    this->dt = this->animate_ ? (float) glfwGetTime() - time : 0;
 
     time = (float) glfwGetTime();
 
@@ -322,8 +357,8 @@ void SceneWindow::onIdle() {
         this->scene_.firstScene_ = false;
 
     // if we have to traisnition to second scene
-    if (!this->scene_.firstScene_ && !this->scene_.secondScene_)
-        this->initSceneNight();
+    //if (!this->scene_.firstScene_ && !this->scene_.secondScene_)
+    //    this->initSceneNight();
 
     // Update and render all objects
     this->scene_.update(dt);

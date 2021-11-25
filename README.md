@@ -21,6 +21,12 @@ In case the output image is flipped, use:
 convert image-input.jpg -flip -define bmp:format=bmp4 -compress none image-output.bmp
 ```
 
+In case the output image is not 24-bit depth, use:
+
+```bash
+convert image.bmp -define bmp:format=bmp4 -compress none -type truecolor image_24bit.bmp
+```
+
 ## Installation instructions
 
 The recommended way to build and explore the examples is to use the [CLion IDE](https://www.jetbrains.com/clion/) which is available for macOS, Linux and Windows. It is free for 30days and you can register for a [FREE LICENSE](https://www.jetbrains.com/student/) using university mail.

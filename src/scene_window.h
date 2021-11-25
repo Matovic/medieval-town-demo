@@ -66,6 +66,9 @@ private:
   bool animate_ = true;
   //bool animate_ = false;
 
+  // delta time for animation
+  float dt = 0.0f;
+
   /*!
    * Reset and initialize the game scene
    * Creating unique smart pointers to objects that are stored in the scene object list
