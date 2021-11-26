@@ -5,6 +5,9 @@ uniform sampler2D Texture;
 // Direction of light
 uniform vec3 LightDirection;
 
+// Direction of light2
+uniform vec3 LightDirection2;
+
 // TODO: Create vector of multiple light direction
 
 // (optional) Transparency

@@ -59,7 +59,7 @@ void SceneWindow::initScene() {
     // Create a camera
     auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
     //camera->position.y = 1.5f;
-    camera->position.z = -15.0f;
+    //camera->position.z = -15.0f;
     this->scene_.camera_ = move(camera);
 
     // Add space background
@@ -109,12 +109,15 @@ void SceneWindow::initScene() {
         // add house on the second side
         house = std::make_unique<House>();
         house->position = {15.0f, 4.5f, 5.0f + z_offset};
+        house->rotation = {0.0f, 0.0f, ppgso::PI * 1.5f};
         this->scene_.objects_.push_back(move(house));
 
-        // add house on the back side
+        // add 5 houses on the back side
+        if ( i > 4)
+            continue;
         house = std::make_unique<House>();
         house->position = {15.0f - (5.0f + z_offset), 4.5f, 35.0f};
-        house->rotation = {0.0f, 0.0f, 0.10f};
+        house->rotation = {0.0f, 0.0f, ppgso::PI};
         this->scene_.objects_.push_back(move(house));
     }
 
@@ -146,7 +149,7 @@ void SceneWindow::initSceneNight() {
     // Create a camera
     auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
     //camera->position.y = 1.5f;
-    camera->position.z = -15.0f;
+    //camera->position.z = -15.0f;
     this->scene_.camera_ = move(camera);
 
     // Add background

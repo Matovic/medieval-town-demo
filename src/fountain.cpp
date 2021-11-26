@@ -32,7 +32,7 @@ bool Fountain::update(Scene &scene, float dt) {
   //this->age += dt;
 
   // Animate position according to time
-  //position += speed * dt;
+  //this->position += glm::vec3{0.0f,0.0f,-2.0f} * dt;//speed * dt;
 
   // Rotate the object
   this->rotation += rotMomentum * dt;
@@ -85,6 +85,7 @@ void Fountain::render(Scene &scene) {
 
   // Set up light
   this->shader->setUniform("LightDirection", scene.lightDirection_);
+  this->shader->setUniform("LightDirection2", scene.lightDirection2_);
 
   // use camera
   this->shader->setUniform("ProjectionMatrix", scene.camera_->projectionMatrix);

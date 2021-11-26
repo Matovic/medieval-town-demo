@@ -42,6 +42,7 @@ void House::render(Scene &scene) {
 
     // Set up light
     this->shader->setUniform("LightDirection", scene.lightDirection_);
+    this->shader->setUniform("LightDirection2", scene.lightDirection2_);
 
     // use camera
     this->shader->setUniform("ProjectionMatrix", scene.camera_->projectionMatrix);
