@@ -1,6 +1,6 @@
 #include <glm/gtc/random.hpp>
 #include "asteroid.h"
-#include "projectile.h"
+//#include "projectile.h"
 #include "explosion.h"
 
 #include <shaders/diffuse_vert_glsl.h>
@@ -45,8 +45,9 @@ bool Asteroid::update(Scene &scene, float dt) {
 
     // We only need to collide with asteroids and projectiles, ignore other objects
     auto asteroid = dynamic_cast<Asteroid*>(obj.get()); // dynamic_pointer_cast<Asteroid>(obj);
-    auto projectile = dynamic_cast<Projectile*>(obj.get()); //dynamic_pointer_cast<Projectile>(obj);
-    if (!asteroid && !projectile) continue;
+    //auto projectile = dynamic_cast<Projectile*>(obj.get()); //dynamic_pointer_cast<Projectile>(obj);
+    if (!asteroid) //&& !projectile)
+            continue;
 
     // When colliding with other asteroids make sure the object is older than .5s
     // This prevents excessive collisions when asteroids explode.
@@ -60,7 +61,7 @@ bool Asteroid::update(Scene &scene, float dt) {
       if (scale.y < 0.5) pieces = 0;
 
       // The projectile will be destroyed
-      if (projectile) projectile->destroy();
+      //if (projectile) projectile->destroy();
 
       // Generate smaller asteroids
       explode(scene, (obj->position + position) / 2.0f, (obj->scale + scale) / 2.0f, pieces);

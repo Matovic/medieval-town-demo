@@ -109,8 +109,6 @@ add_executable(town
         src/camera.cpp
         src/asteroid.cpp
         src/generator.cpp
-        src/player.cpp
-        src/projectile.cpp
         src/explosion.cpp
         src/scene_window.cpp
         src/tower.cpp

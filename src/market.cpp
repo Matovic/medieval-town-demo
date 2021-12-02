@@ -33,7 +33,7 @@ bool Market::update(Scene &scene, float dt) {
    // if (scene.camera_->position.z > -13 && scene.camera_->position.z < -1)
      //   this->rotation += rotMomentum * dt;
 
-    // Collide with scene
+    // TODO: Collide with scene
     for (auto &obj : scene.objects_) {
       // Ignore self in scene
       if (obj.get() == this) continue;
