@@ -4,6 +4,7 @@
 #include <shaders/texture_vert_glsl.h>
 #include <shaders/texture_frag_glsl.h>
 
+
 Sky::Sky(const bool firstScene) {
 
   // Reset texture if we change the scenes

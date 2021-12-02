@@ -266,8 +266,9 @@ void SceneWindow::onKey(int key, int scanCode, int action, int mods) {
     }
 
     // move up
-    if (key == GLFW_KEY_SPACE) {
-      this->scene_.camera_->position.y += 5.0f * this->dt;
+    if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
+      //this->scene_.camera_->position.y += 5.0f * this->dt;
+        this->scene_.camera_->key_pressed = true;
     }
 
     // move down

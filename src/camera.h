@@ -15,7 +15,7 @@
 class Camera {
 public:
   glm::vec3 up{0,1,0};
-  glm::vec3 position{0,2,-15};
+  glm::vec3 position{0, 2, -13};
   glm::vec3 back{0,0,-1};
   glm::vec3 speed{0,0,2.0f};
 
@@ -28,15 +28,14 @@ public:
   size_t currentKeyFrameIndex = 0;
   float age{0.0f};
 
-
-  std::list<std::unique_ptr<KeyFrame>> v_keyframe_; /* = {
-    {
-          //std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(0, 2, -15), glm::vec3{0, 2, 0}, this->back), 1)},
-  };*/
+  // animate with keyfgrames
+  std::list<std::unique_ptr<KeyFrame>> v_keyframe_;
   std::list<std::unique_ptr<KeyFrame>>::iterator currIterator;
   std::list<std::unique_ptr<KeyFrame>>::iterator nextIterator;
 
   size_t executedKeyFrames = 0;
+
+  bool key_pressed = false;
 
   /*!
    * Create new Camera that will generate viewMatrix and projectionMatrix based on its position, up and back vectors
