@@ -94,7 +94,8 @@ void SceneWindow::initScene() {
 
     // Add markets
     auto market1 = std::make_unique<Market>();
-    market1->position = {2.0f, 0.0f, 10.0f};
+    market1->position = {0.0f, 0.0f, 20.0f};
+    market1->rotation = {0.0f, 0.0f, ppgso::PI * 2.f};
     this->scene_.objects_.push_back(move(market1));
 
     // add houses

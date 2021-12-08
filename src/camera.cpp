@@ -21,20 +21,21 @@ Camera::Camera(float fow, float ratio, float near, float far)
   // glm::perspective creates a 4x4 perspective projection matrix that is used in a shader
   this->projectionMatrix = glm::perspective(fowInRad, ratio, near, far);
 
-  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -13), glm::vec3{0, 2, -12}, this->up, 0));
+  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 1.5, -13), glm::vec3{0, 2, -12}, this->up, 0));
+//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 1.5, -13), glm::vec3{0, 2, -12}, this->up, 2));
   this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 3));
   this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 4, 14), glm::vec3{-5, 2, 15}, this->up, 5));
   this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 7));
   this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 4, 15), glm::vec3{4, 4, 16}, this->up, 10));
 
-  // provide lookAt matrix(viewMatrix) & time
-  // for lookAt - first is position(x,y,z) & second is where is camera looking - (x,y, z+1) for facing forwards, (x+N, y, z+M) for rotating left
-  //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(0, 2, -13), glm::vec3{0, 2, -12}, this->up), 0));
-  //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up), 3));
-  //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(4, 4, 14), glm::vec3{-5, 2, 15}, this->up), 5));
-  //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up), 7));
-  //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(4, 4, 15), glm::vec3{4, 4, 16}, this->up), 10));
-  //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(0, 2, 20), glm::vec3{-0, 2, 21}, this->up), 12));
+//   provide lookAt matrix(viewMatrix) & time
+//   for lookAt - first is position(x,y,z) & second is where is camera looking - (x,y, z+1) for facing forwards, (x+N, y, z+M) for rotating left
+//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(0, 2, -13), glm::vec3{0, 2, -12}, this->up), 0));
+//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up), 3));
+//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(4, 4, 14), glm::vec3{-5, 2, 15}, this->up), 5));
+//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up), 7));
+//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(4, 4, 15), glm::vec3{4, 4, 16}, this->up), 10));
+//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(0, 2, 20), glm::vec3{-0, 2, 21}, this->up), 12));
 
 
   this->currIterator = v_keyframe_.begin();
