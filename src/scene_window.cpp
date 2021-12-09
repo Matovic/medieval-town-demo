@@ -349,7 +349,8 @@ void SceneWindow::onIdle() {
     static auto time = (float) glfwGetTime();
 
     // Compute time delta based on bool variable animate
-    this->dt = this->animate_ ? (float) glfwGetTime() - time : 0;
+    //this->dt = this->animate_ ? (float) glfwGetTime() - time : 0;
+    this->dt = (float) glfwGetTime() - time;
 
     time = (float) glfwGetTime();
 
