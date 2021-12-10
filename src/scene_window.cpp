@@ -24,6 +24,8 @@
 #include "floor.h"
 #include "market.h"
 #include "house.h"
+#include "apple.h"
+#include "cauldron.h"
 
 /*!
 * Construct custom game window
@@ -94,12 +96,40 @@ void SceneWindow::initScene() {
 
     // Add markets
     auto market1 = std::make_unique<Market>();
-    market1->position = {0.0f, 0.0f, 20.0f};
-    market1->rotation = {0.0f, 0.0f, ppgso::PI * 2.f};
+    market1->position = {1.f, 0.0f, 25.0f};
+    market1->rotation = {0.0f, 0.0f, ppgso::PI * 1.f};
     this->scene_.objects_.push_back(move(market1));
 
-    // add houses
+    int market_count = 5;
     float z_offset = 0.0f;
+    while (market_count != 0)
+    {
+        auto market = std::make_unique<Market>();
+        auto market2 = std::make_unique<Market>();
+        market->position = {glm::linearRand(-10.0f, -5.0f), 0.0f, 8.f + z_offset};
+        market->rotation = {0.0f, 0.0f, ppgso::PI * glm::linearRand(0.f, 3.14f)};
+        market2->position = {glm::linearRand(5.0f, 10.0f), 0.0f, 8.f + z_offset};
+        market2->rotation = {0.0f, 0.0f, ppgso::PI * glm::linearRand(0.f, 3.14f)};
+        this->scene_.objects_.push_back(move(market));
+        this->scene_.objects_.push_back(move(market2));
+        market_count--;
+        z_offset += 5.0f;
+    }
+
+    // Add apple
+    auto apple = std::make_unique<Apple>();
+    apple->position = {1.f, 0.0f, 25.0f};
+    apple->rotation = {0.0f, 0.0f, ppgso::PI * 1.f};
+    this->scene_.objects_.push_back(move(apple));
+
+    // Add cauldron
+//    auto cauldron = std::make_unique<Cauldron>();
+//    cauldron->position = {1.f, 0.0f, 25.0f};
+//    cauldron->rotation = {0.0f, 0.0f, ppgso::PI * 1.f};
+//    this->scene_.objects_.push_back(move(cauldron));
+
+    // add houses
+    z_offset = 0.0f;
     for (unsigned int i = 0; i < 6; ++i, z_offset += 5.0f)
     {
         // add house on 1 side

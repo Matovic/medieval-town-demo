@@ -16,12 +16,27 @@
  */
 Camera::Camera(float fow, float ratio, float near, float far)
 {
-  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -13), glm::vec3{0, 2, -12}, this->up, 0));
+    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -13), glm::vec3{0, 2, -12}, this->up, 0));
+    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 35, 0), glm::vec3{0, 30, 1}, this->up, 5));
+//    market center camera
+    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2.5, 23), glm::vec3{0, 1.5, 25}, this->up, 15));
   //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 1.5, -13), glm::vec3{0, 2, -12}, this->up, 2));
-  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 3));
-  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 4, 14), glm::vec3{-5, 2, 15}, this->up, 5));
-  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 7));
-  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 4, 15), glm::vec3{4, 4, 16}, this->up, 10));
+//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 3), glm::vec3{0, 2, 6}, this->up, 1));
+//    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 4), glm::vec3{0, 2, 6}, this->up, 2));
+//    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 3));
+//    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 6), glm::vec3{0, 2, 7}, this->up, 4));
+//
+
+//    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(-3, 2, 23), glm::vec3{-2, 2, 25}, this->up, 3));
+//    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(3, 2, 23), glm::vec3{2, 2, 25}, this->up, 4));
+//    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 4, 22), glm::vec3{0, -2, 25}, this->up, 5));
+
+//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 6}, this->up, 2));
+//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 6}, this->up, 3));
+
+//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 4, 14), glm::vec3{-5, 2, 15}, this->up, 5));
+//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 7));
+//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 4, 15), glm::vec3{4, 4, 16}, this->up, 10));
 
 //   provide lookAt matrix(viewMatrix) & time
 //   for lookAt - first is position(x,y,z) & second is where is camera looking - (x,y, z+1) for facing forwards, (x+N, y, z+M) for rotating left

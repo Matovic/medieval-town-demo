@@ -28,7 +28,9 @@ Market::Market() {
 }
 
 bool Market::update(Scene &scene, float dt) {
-
+    this->age += dt;
+    if (this->age > 10.0f)
+        return false;
     // Rotate the object
    // if (scene.camera_->position.z > -13 && scene.camera_->position.z < -1)
      //   this->rotation += rotMomentum * dt;
