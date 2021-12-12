@@ -20,6 +20,7 @@ Market::Market() {
     // Set scale and rotation
     this->scale *= 1.0f;
     this->rotation ={0.0f, 0.0f, 1.5f};
+    this->final_age_ = 10.0f;
 
     // Initialize static resources if needed
     if (!this->shader) this->shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
@@ -29,7 +30,7 @@ Market::Market() {
 
 bool Market::update(Scene &scene, float dt) {
     this->age += dt;
-    if (this->age > 10.0f)
+    if (this->final_age_ > 0 && this->age > this->final_age_)
         return false;
     // Rotate the object
    // if (scene.camera_->position.z > -13 && scene.camera_->position.z < -1)

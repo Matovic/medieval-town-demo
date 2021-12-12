@@ -18,7 +18,7 @@ std::unique_ptr<ppgso::Shader> Cauldron::shader;
 
 Cauldron::Cauldron() {
     // Set scale and rotation
-    this->scale *= 0.002f;
+    this->scale *= 2.002f;
     this->rotation ={0.0f, 0.0f, 1.5f};
 
     // Initialize static resources if needed
@@ -34,7 +34,7 @@ bool Cauldron::update(Scene &scene, float dt) {
     //   this->rotation += rotMomentum * dt;
 
     // TODO: Collide with scene
-    for (auto &obj : scene.objects_) {
+    /*for (auto &obj : scene.objects_) {
         // Ignore self in scene
         if (obj.get() == this) continue;
 
@@ -62,7 +62,7 @@ bool Cauldron::update(Scene &scene, float dt) {
             // Destroy self
             return false;
         }
-    }
+    }*/
 
     // Generate modelMatrix from position, rotation and scale
     generateModelMatrix();
@@ -82,7 +82,7 @@ void Cauldron::render(Scene &scene) {
     this->shader->setUniform("ViewMatrix", scene.camera_->viewMatrix);
 
     // render mesh
-    this->shader->setUniform("ModelMatrix", modelMatrix);
+    this->shader->setUniform("ModelMatrix", this->modelMatrix);
     this->shader->setUniform("Texture", *texture);
     this->mesh->render();
 }

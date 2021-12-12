@@ -1,7 +1,3 @@
-//
-// Created by Peter Oliver Kolek on 10/12/2021.
-//
-
 #ifndef MEDIEVAL_TOWN_DEMO_CAULDRON_H
 #define MEDIEVAL_TOWN_DEMO_CAULDRON_H
 

@@ -14,39 +14,40 @@
  * @param near - Distance to the near frustum plane
  * @param far - Distance to the far frustum plane
  */
-Camera::Camera(float fow, float ratio, float near, float far)
+Camera::Camera(float fow, float ratio, float near, float far, const bool firstScene)
 {
-    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -13), glm::vec3{0, 2, -12}, this->up, 0));
-    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 35, 0), glm::vec3{0, 30, 1}, this->up, 5));
-//    market center camera
-    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2.5, 23), glm::vec3{0, 1.5, 25}, this->up, 15));
-  //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 1.5, -13), glm::vec3{0, 2, -12}, this->up, 2));
-//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 3), glm::vec3{0, 2, 6}, this->up, 1));
-//    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 4), glm::vec3{0, 2, 6}, this->up, 2));
-//    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 3));
-//    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 6), glm::vec3{0, 2, 7}, this->up, 4));
-//
+    // set keyframes for first scene
+    if (firstScene)
+    {
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -13), glm::vec3{0, 2, -12}, this->up, 0));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 35, 0), glm::vec3{0, 30, 1}, this->up, 5));
+        //    market center camera
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2.5, 23), glm::vec3{0, 1.5, 25}, this->up, 15));
+      //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 1.5, -13), glm::vec3{0, 2, -12}, this->up, 2));
+    //  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 3), glm::vec3{0, 2, 6}, this->up, 1));
+    //    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 4), glm::vec3{0, 2, 6}, this->up, 2));
+    //    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 3));
+    //    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 6), glm::vec3{0, 2, 7}, this->up, 4));
+    //
 
-//    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(-3, 2, 23), glm::vec3{-2, 2, 25}, this->up, 3));
-//    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(3, 2, 23), glm::vec3{2, 2, 25}, this->up, 4));
-//    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 4, 22), glm::vec3{0, -2, 25}, this->up, 5));
+    //    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(-3, 2, 23), glm::vec3{-2, 2, 25}, this->up, 3));
+    //    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(3, 2, 23), glm::vec3{2, 2, 25}, this->up, 4));
+    //    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 4, 22), glm::vec3{0, -2, 25}, this->up, 5));
 
-//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 6}, this->up, 2));
-//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 6}, this->up, 3));
+    //  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 6}, this->up, 2));
+    //  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 6}, this->up, 3));
 
-//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 4, 14), glm::vec3{-5, 2, 15}, this->up, 5));
-//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 7));
-//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 4, 15), glm::vec3{4, 4, 16}, this->up, 10));
+    //  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 4, 14), glm::vec3{-5, 2, 15}, this->up, 5));
+    //  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 7));
+    //  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 4, 15), glm::vec3{4, 4, 16}, this->up, 10));
+    }
 
-//   provide lookAt matrix(viewMatrix) & time
-//   for lookAt - first is position(x,y,z) & second is where is camera looking - (x,y, z+1) for facing forwards, (x+N, y, z+M) for rotating left
-//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(0, 2, -13), glm::vec3{0, 2, -12}, this->up), 0));
-//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up), 3));
-//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(4, 4, 14), glm::vec3{-5, 2, 15}, this->up), 5));
-//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up), 7));
-//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(4, 4, 15), glm::vec3{4, 4, 16}, this->up), 10));
-//  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::lookAt(glm::vec3(0, 2, 20), glm::vec3{-0, 2, 21}, this->up), 12));
-
+    // set keyframes for Night scene
+    else
+    {
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3{0, 2, -13}, glm::vec3{0, 2, -12}, this->up, 0));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3{0, 2, 24}, glm::vec3{0, 2, 25}, this->up, 5));
+    }
 
   this->currIterator = v_keyframe_.begin();
   this->nextIterator = v_keyframe_.begin();
@@ -89,32 +90,6 @@ void Camera::update(float dt) {
 
     else
     {
-        // Interpolate half way from original view to the new.
-        float interp_factor = (this->age - currentKeyFrame->time_) / (nextKeyFrame->time_ - currentKeyFrame->time_);
-        //float interp_factor = 0.5; // 0.0 == original, 1.0 == new
-
-        // First interpolate the rotation
-        glm::quat  quat_interp = glm::slerp(currentKeyFrame->quatMatrix_,
-                                            nextKeyFrame->quatMatrix_,
-                                            interp_factor);
-
-        // Then interpolate the translation
-        glm::vec3  pos_interp  = glm::mix(currentKeyFrame->eye_,  nextKeyFrame->eye_,  interp_factor);
-        //glm::mat4  pos_interp  = glm::interpolate(currentKeyFrame->eye_,  nextKeyFrame->eye_,  interp_factor);
-        //std::cout << pos_interp << '\n';
-
-        glm::mat4  view_matrix = glm::mat4_cast(quat_interp); // Setup rotation
-        //std::cout << glm::to_string(view_matrix) << std::endl;
-        auto vec = glm::vec4(pos_interp, 1.0);  // Introduce translation
-        //std::cout << glm::to_string(view_matrix) << std::endl;
-        view_matrix[3][0] = vec[0];
-        view_matrix[3][1] = vec[1];
-        view_matrix[3][2] = vec[2];
-        view_matrix[3][3] = vec[3];
-        //std::cout << glm::to_string(view_matrix) << std::endl;
-
-        //this->viewMatrix = view_matrix;
-        //currentKeyFrame->quatMatrix_ = glm::quat_cast(this->viewMatrix);
         float t = ((this->age - currentKeyFrame->time_) / (nextKeyFrame->time_ - currentKeyFrame->time_));
         t /= 10;
 
@@ -129,7 +104,7 @@ void Camera::update(float dt) {
         currentKeyFrame->viewMatrix_ = this->viewMatrix;
 
         //std::cout << glm::to_string(this->viewMatrix) << std::endl;
-        std::cout << "Changed, " << glm::to_string(currentKeyFrame->viewMatrix_) << "\nnext " << glm::to_string(nextKeyFrame->viewMatrix_) << " keyframes: "  << this->executedKeyFrames << " age: " << this->age << " t: " << t << '\n';
+        //std::cout << "Changed, " << glm::to_string(currentKeyFrame->viewMatrix_) << "\nnext " << glm::to_string(nextKeyFrame->viewMatrix_) << " keyframes: "  << this->executedKeyFrames << " age: " << this->age << " t: " << t << '\n';
     }
     /*
     if (this->key_pressed)

@@ -32,30 +32,6 @@ public:
   SceneWindow(const unsigned int&);
 
   /*!
-   * Handles pressed key when the window is focused
-   * @param key Key code of the key being pressed/released
-   * @param scanCode Scan code of the key being pressed/released
-   * @param action Action indicating the key state change
-   * @param mods Additional modifiers to consider
-   */
-  void onKey(int key, int scanCode, int action, int mods) override;
-
-  /*!
-   * Handle cursor position changes
-   * @param cursorX Mouse horizontal position in window coordinates
-   * @param cursorY Mouse vertical position in window coordinates
-   */
-  void onCursorPos(double cursorX, double cursorY) override;
-
-  /*!
-   * Handle cursor buttons
-   * @param button Mouse button being manipulated
-   * @param action Mouse bu
-   * @param mods
-   */
-  void onMouseButton(int button, int action, int mods) override;
-
-  /*!
    * Window update implementation that will be called automatically from pollEvents
    */
   void onIdle() override;

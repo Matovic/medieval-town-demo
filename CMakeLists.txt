@@ -117,7 +117,12 @@ add_executable(town
         src/floor.cpp
         src/market.cpp
         src/house.cpp
-        src/keyframe.cpp src/apple.cpp src/apple.h src/cauldron.cpp src/cauldron.h)
+        src/keyframe.cpp 
+        src/apple.cpp
+        src/cauldron.cpp
+        src/carpet.cpp
+        src/cauldron_night.cpp
+        src/apple_night.cpp)
 target_link_libraries(town ppgso shaders)
 install(TARGETS town DESTINATION .)
 add_custom_command(TARGET town POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data/ ${CMAKE_CURRENT_BINARY_DIR})

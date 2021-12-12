@@ -1,7 +1,3 @@
-//
-// Created by Peter Oliver Kolek on 23/11/2021.
-//
-
 #ifndef MEDIEVAL_TOWN_DEMO_FLOOR_H
 #define MEDIEVAL_TOWN_DEMO_FLOOR_H
 #include <ppgso/ppgso.h>

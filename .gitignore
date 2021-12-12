@@ -18,5 +18,5 @@ data/cube.*
 data/lena.*
 data/missile.*
 data/quad.*
-data/sphere.*
+#data/sphere.*
 data/stars.*
