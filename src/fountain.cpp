@@ -79,10 +79,35 @@ bool Fountain::update(Scene &scene, float dt) {
 void Fountain::render(Scene &scene) {
   this->shader->use();
 
+    // Set up materials
+    shader->setUniform("material.ambient",glm::vec3(0.2f, 0.2f, 0.2f));
+    shader->setUniform("material.diffuse", glm::vec3(10.0f, 10.0f, 10.0f));
+    shader->setUniform("material.specular", glm::vec3(1.0f, 1.0f, 1.0f));
+    shader->setUniform("material.shininess", 0.21794872f * 128.f * 16);
+
+
     // Set up light
-    this->shader->setUniform("LightDirection", scene.lightDirection_);
-    this->shader->setUniform("lightColor", scene.lightColor_);
-    this->shader->setUniform("viewPos", scene.camera_->position);
+    shader->setUniform("viewPos", scene.camera_->position);
+    size_t index = 0;
+    for (auto& obj : scene.lights_)
+    {
+        /*glm::vec3 lighColor;
+        lighColor.x = sin((glfwGetTime() + index) * 2.0f);
+        lighColor.y = sin((glfwGetTime() + index) * 0.7f);
+        lighColor.z = sin((glfwGetTime() + index) * 1.3f);
+
+        shader->setUniform("fluorescentColor", lighColor);
+
+        //obj->color = lighColor;
+        obj->lightColor_ = lighColor;*/
+        shader->setUniform("lights[" + std::to_string(index) + "].direction", obj->lightDirection_);
+        shader->setUniform("lights[" + std::to_string(index) + "].ambient", obj->ambient);
+        shader->setUniform("lights[" + std::to_string(index) + "].diffuse", obj->diffuse);
+        shader->setUniform("lights[" + std::to_string(index) + "].specular", obj->specular);
+        shader->setUniform("lights[" + std::to_string(index) + "].color", obj->lightColor_);
+        ++index;
+    }
+
 
   // use camera
   this->shader->setUniform("ProjectionMatrix", scene.camera_->projectionMatrix);

@@ -30,6 +30,7 @@
 //#include "cauldron_night.h"
 #include "apple_night.h"
 #include "light.h"
+#include "sun.h"
 
 /*!
 * Construct custom game window
@@ -72,12 +73,26 @@ void SceneWindow::initScene() {
     // Add space background
     this->scene_.objects_.push_back(std::make_unique<Sky>());
 
-    // Add light
-    auto light = std::make_unique<Light>();
-    light->position = glm::vec3{30.0f, 45.0f, -50.0f};
-    light->scale *= 5.0f;
-    light->speed = {-1.0f, -1.0f, 5.0f};
-    this->scene_.objects_.push_back(std::move(light));
+    // Add sun
+    auto sun_light = std::make_unique<Light>();
+    //sun->position = glm::vec3{30.0f, 45.0f, -50.0f};
+    //sun->scale *= 5.0f;
+    sun_light->lightDirection_= glm::vec3{30.0f, 45.0f, -50.0f};
+    sun_light->lightColor_ = glm::vec3{1.0f, 1.0f, 1.0f};
+    sun_light->speed = glm::vec3{-1.0f, -1.0f, 5.0f};
+    sun_light->colorSpeed = glm::vec3{0.1f, 0.1f, 0.1f};
+    sun_light->ambient = glm::vec3{0.2f, 0.2f, 0.2f};
+    sun_light->diffuse = glm::vec3{0.05f, 0.05f, 0.05f};
+    sun_light->specular = glm::vec3{0.01f, 0.01f, 0.01f};
+    //auto sun_obj = std::make_move_iterator<Light>(sun);
+    //this->scene_.objects_.push_back(sun);
+    this->scene_.lights_.push_back(std::move(sun_light));
+
+    auto sun_ = std::make_unique<Sun>();
+    sun_->position = glm::vec3{30.0f, 45.0f, -50.0f};
+    sun_->speed = glm::vec3{-1.0f, -1.0f, 5.0f};
+    sun_->scale *= 2.0f;
+    this->scene_.objects_.push_back(std::move(sun_));
 
     // Add floor
     auto floor = std::make_unique<Floor>();
@@ -169,10 +184,26 @@ void SceneWindow::initScene() {
         this->scene_.objects_.push_back(move(house));
     }
 
-    // Add generator to scene
-    //auto generator = std::make_unique<Generator>();
-    //generator->position.y = 10.0f;
-    //this->scene_.objects_.push_back(move(generator));
+    // Add lights on the houses
+    auto light = std::make_unique<Light>();
+    light->lightDirection_ = {15.0f - (5.0f + 0.0f), 8.5f, 30.0f};
+    //light->position.y =
+    //light->scale *= 0.2f;
+    light->speed = {0.0f, 0.0f, 0.0f};
+    //light->color = {1.0f, 0.0f, 0.0f};
+    light->lightColor_ = {1.0f, 0.0f, 0.0f};
+    light->colorSpeed = {-0.1f, 0.1f, 0.1f};
+    light->ambient = {0.2f, 0.2f, 0.2f};
+    light->diffuse = {.5f, .5f, .5f};
+    light->specular = {1.0f, 1.0f, 1.0f};
+    this->scene_.lights_.push_back(std::move(light));
+
+    auto lamp = std::make_unique<Sun>();
+    lamp->position = {15.0f - (5.0f + 0.0f), 8.5f, 30.0f};
+    lamp->color = {1.0f, 0.0f, 0.0f};
+    lamp->scale *= 0.2f;
+    lamp->colorSpeed = {-0.1f, 0.1f, 0.1f};
+    this->scene_.objects_.push_back(std::move(lamp));
 }
 
 /*!
@@ -194,7 +225,6 @@ void SceneWindow::initSceneNight() {
     //camera->position.y = 1.5f;
     //camera->position.z = -15.0f;
     this->scene_.camera_ = move(camera);
-
 
     // Add background
     this->scene_.objects_.push_back(std::make_unique<Sky>(false));

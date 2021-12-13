@@ -13,8 +13,8 @@ uniform mat4 ModelMatrix;
 out vec2 texCoord;
 
 // Normal to pass to the fragment shader
-out vec4 normal;
-out vec3 normal_specular;
+//out vec4 normal;
+out vec3 normal;
 
 // Fragmet position will be passed to the fragment shader
 out vec3 FragPos;  
@@ -24,11 +24,12 @@ void main() {
   texCoord = TexCoord;
 
   // Normal in world coordinates
-  normal = normalize(ModelMatrix * vec4(Normal, 0.0f));
+  //normal = normalize(ModelMatrix * vec4(Normal, 0.0f));
   //Normal_ = mat3(transpose(inverse(ViewMatrix * ModelMatrix))) * Normal;
   // Fragment position in world coordinates
   FragPos = vec3(ModelMatrix * vec4(Position, 1.0));
-  normal_specular = mat3(transpose(inverse(ViewMatrix * ModelMatrix))) * Normal;
+  //normal_specular = mat3(transpose(inverse(ViewMatrix * ModelMatrix))) * Normal;
+  normal = mat3(transpose(inverse(ModelMatrix))) * Normal;
 
   // Calculate the final position on screen
   gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * vec4(Position, 1.0);

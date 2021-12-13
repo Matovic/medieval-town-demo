@@ -3,23 +3,29 @@
 #include <shaders/color_frag_glsl.h>
 
 // Static resources
-std::unique_ptr<ppgso::Mesh> Light::mesh;
-std::unique_ptr<ppgso::Shader> Light::shader;
+/*std::unique_ptr<ppgso::Mesh> Light::mesh;
+std::unique_ptr<ppgso::Shader> Light::shader;*/
 
 Light::Light() 
 {
-    if (!this->shader) this->shader = std::make_unique<ppgso::Shader>(color_vert_glsl, color_frag_glsl);
-    if (!this->mesh) this->mesh = std::make_unique<ppgso::Mesh>("objects/sphere.obj");
+    /*if (!this->shader) this->shader = std::make_unique<ppgso::Shader>(color_vert_glsl, color_frag_glsl);
+    if (!this->mesh) this->mesh = std::make_unique<ppgso::Mesh>("objects/sphere.obj");*/
 }
 
-bool Light::update(Scene &scene, float dt) {
-    this->position += speed * dt;
-    scene.lightDirection_ = this->position;
-    generateModelMatrix();
+bool Light::update(float dt) {
+    //this->position += this->speed * dt;
+    this->lightDirection_ += this->speed * dt;
+    this->lightColor_ += this->colorSpeed * dt;
+    //this->color += this->colorSpeed * dt;
+    //scene.lightColor_ = this->lightColor_;
+    //scene.lightDirection_ = this->position;
+    //scene.ambientStrength_ = 0.5f;
+    //scene.specularStrength_ = 0.1f;
+    //generateModelMatrix();
     return true;
 }
 
-void Light::render(Scene &scene) {
+/*void Light::render(Scene &scene) {
     shader->use();
 
     // Set up light
@@ -34,9 +40,9 @@ void Light::render(Scene &scene) {
     shader->setUniform("ModelMatrix", this->modelMatrix);
 
     mesh->render();
-}
+}*/
 
-bool Light::movementFront(Scene &scene, float dt) {
+/*bool Light::movementFront(Scene &scene, float dt) {
     return false;
 }
 
@@ -46,7 +52,7 @@ bool Light::floating(Scene &scene, float dt) {
 
 bool Light::movementBack(Scene &scene, float dt) {
     return false;
-}
+}*/
 
 
 //void Light::update_keyframe(Scene &scene, float dt) {}

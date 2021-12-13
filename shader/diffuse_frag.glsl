@@ -1,4 +1,23 @@
+// inspired by https://learnopengl.com/Lighting/Multiple-lights
 #version 330
+struct Material {
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
+};   
+uniform Material material;
+
+#define NO_LIGHTS 10  
+struct Light {
+    vec3 direction;
+    vec3 color;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};  
+uniform Light lights[NO_LIGHTS];
+
 // A texture is expected as program attribute
 uniform sampler2D Texture;
 
@@ -11,6 +30,12 @@ uniform vec3 lightColor;
 // Position ov camera/viewer, spectacular
 uniform vec3 viewPos;
 
+// 
+uniform float ambientStrength;
+
+// 
+uniform float specularStrength;
+
 // (optional) Transparency
 uniform float Transparency;
 
@@ -21,33 +46,45 @@ uniform vec2 TextureOffset;
 in vec2 texCoord;
 
 // Wordspace normal passed from vertex shader
-in vec4 normal;
+//in vec4 normal;
+in vec3 normal;
 in vec3 FragPos;
-in vec3 normal_specular;
+//in vec3 normal_specular;
 
 // The final color
 out vec4 FragmentColor;
 
-void main() {
-  // Compute diffuse lighting
-  vec3 norm = normalize(normal_specular);
-  vec3 lightDir = normalize(LightDirection - FragPos);
-  float diff = max(dot(normal, vec4(lightDir, 1.0f)), 0.0f);
-  vec4 diffuse = vec4(diff * lightColor, 1.0f);
-  
-  // Compute ambient lighting 
-  float ambientStrength = 0.1;
-  vec4 ambient = vec4(ambientStrength * lightColor, 1.0f);
-  
-  // Compute spectacular lighting
-  float specularStrength = 0.5;
-  vec3 viewDir = normalize(viewPos - FragPos);
-  vec3 reflectDir = reflect(-lightDir, norm); 
-  float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-  vec4 specular = vec4(specularStrength * spec * lightColor, 1.0f); 
+vec3 CalculateLight(Light light, vec3 normal, vec3 viewDir, vec3 FragPos)
+{
+    // light direction
+    vec3 lightDir = normalize(light.direction - FragPos);
+    
+    // diffuse shading
+    float diff = max(dot(normal, lightDir), 0.0);
+    
+    // specular shading
+    vec3 reflectDir = reflect(-lightDir, normal);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    
+    // combine results
+    vec3 ambient  = light.color * light.ambient * material.ambient;
+    vec3 diffuse  = light.color * light.diffuse  * diff * material.diffuse;
+    vec3 specular = light.color * light.specular * spec * material.specular;
+    return (ambient + diffuse + specular);
+}
 
-  // Lookup the color in Texture on coordinates given by texCoord
-  // NOTE: Texture coordinate is inverted vertically for compatibility with OBJ
-  FragmentColor = texture(Texture, vec2(texCoord.x, 1.0 - texCoord.y) + TextureOffset) * (diffuse + ambient + specular);
+void main() {  
+  // properties
+  vec3 norm = normalize(normal);
+  vec3 viewDir = normalize(viewPos - FragPos);
+  
+  // define an output color value
+  vec3 output = vec3(0.0);
+
+  // add the directional light's contribution to the output for all point lights
+  for(int i = 0; i < NO_LIGHTS; i++)
+  	  output += CalculateLight(lights[i], norm, viewDir, FragPos);
+  
+  FragmentColor = texture(Texture, vec2(texCoord.x, 1.0 - texCoord.y)+ TextureOffset) * vec4(output, 1.0);
   FragmentColor.a = Transparency;
 }

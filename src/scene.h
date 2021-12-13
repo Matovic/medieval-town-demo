@@ -38,6 +38,9 @@ class Scene {
     // Camera object
     std::unique_ptr<Camera> camera_;
 
+    // All lights in scene
+    std::list<std::unique_ptr<Light>> lights_;
+
     // All objects to be rendered in scene
     std::list<std::unique_ptr<Object>> objects_;
 
@@ -64,7 +67,8 @@ class Scene {
     // lightColor
     glm::vec3 lightColor_{1.0f, 1.0f, 1.0f};
 
-    // TODO: Define other lights here
+    float specularStrength_;
+    float ambientStrength_;
 };
 
 #endif // _PPGSO_SCENE_H

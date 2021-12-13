@@ -7,6 +7,17 @@
 void Scene::update(float time) {
   this->camera_->update(time);
 
+  auto light_i = std::begin(this->lights_);
+  while (light_i != std::end(this->lights_))
+  {
+      auto obj = light_i->get();
+      // erase object from container if it should be deleted
+      if (!obj->update(time))
+        light_i = this->lights_.erase(light_i); // NOTE: no need to call destructors as we store shared pointers in the scene
+      else
+        ++light_i;
+  }
+
   // Use iterator to update all objects so we can remove while iterating
   auto i = std::begin(this->objects_);
 
