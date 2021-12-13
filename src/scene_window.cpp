@@ -150,13 +150,13 @@ void SceneWindow::initScene() {
 
     // Add apple
     auto apple = std::make_unique<Apple>();
-    apple->position = {1.f, 2.0f, 25.0f};
+    apple->position = {0.f, 1.8f, 25.3f};
     apple->rotation = {0.0f, 0.0f, ppgso::PI * 1.f};
     this->scene_.objects_.push_back(move(apple));
 
     // Add cauldron
     auto cauldron = std::make_unique<Cauldron>();
-    cauldron->position = {0.f, 2.0f, 25.0f};
+    cauldron->position = {0.f, 1.2f, 25.3f};
     //cauldron->rotation = {0.0f, 0.0f, ppgso::PI * 1.f};
     this->scene_.objects_.push_back(move(cauldron));
 

@@ -18,7 +18,7 @@ std::unique_ptr<ppgso::Shader> Cauldron::shader;
 
 Cauldron::Cauldron() {
     // Set scale and rotation
-    this->scale *= 2.002f;
+    this->scale *= 1.f;
     this->rotation ={0.0f, 0.0f, 1.5f};
 
     // Initialize static resources if needed

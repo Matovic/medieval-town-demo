@@ -19,11 +19,21 @@ Camera::Camera(float fow, float ratio, float near, float far, const bool firstSc
     // set keyframes for first scene
     if (firstScene)
     {
+        // init
         this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -13), glm::vec3{0, 2, -12}, this->up, 0));
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 0), glm::vec3{0, 2, 1}, this->up, 2));
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 35, 0), glm::vec3{0, 30, 1}, this->up, 5));
-        //    market center camera
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2.5, 23), glm::vec3{0, 1.5, 25}, this->up, 15));
+        // fountain
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 2));
+        // right
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(-2, 2, 5), glm::vec3{-3, 2, 6}, this->up, 3));
+        // left
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(2, 2, 5), glm::vec3{3, 2, 6}, this->up, 4));
+        // market center
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2.5, 23), glm::vec3{0, 1.5, 25}, this->up, 15));
+        // sun
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(2, 2.5, 23), glm::vec3{3, 4, 25}, this->up, 16));
+        // bird view
+//        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 30, 6), glm::vec3{0, 10, 12}, this->up, 16));
+
       //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 1.5, -13), glm::vec3{0, 2, -12}, this->up, 2));
     //  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 3), glm::vec3{0, 2, 6}, this->up, 1));
     //    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 4), glm::vec3{0, 2, 6}, this->up, 2));

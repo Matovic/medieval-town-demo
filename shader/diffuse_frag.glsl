@@ -79,12 +79,12 @@ void main() {
   vec3 viewDir = normalize(viewPos - FragPos);
   
   // define an output color value
-  vec3 output = vec3(0.0);
+  vec3 result = vec3(0.0);
 
   // add the directional light's contribution to the output for all point lights
   for(int i = 0; i < NO_LIGHTS; i++)
-  	  output += CalculateLight(lights[i], norm, viewDir, FragPos);
+    result += CalculateLight(lights[i], norm, viewDir, FragPos);
   
-  FragmentColor = texture(Texture, vec2(texCoord.x, 1.0 - texCoord.y)+ TextureOffset) * vec4(output, 1.0);
+  FragmentColor = texture(Texture, vec2(texCoord.x, 1.0 - texCoord.y)+ TextureOffset) * vec4(result, 1.0);
   FragmentColor.a = Transparency;
 }
