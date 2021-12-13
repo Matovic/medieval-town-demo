@@ -19,7 +19,7 @@ Explosion::Explosion() {
   // Initialize static resources if needed
   if (!this->shader) this->shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
   if (!this->texture) this->texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("textures/explosion.bmp"));
-  if (!this->mesh) this->mesh = std::make_unique<ppgso::Mesh>("asteroid.obj");
+  if (!this->mesh) this->mesh = std::make_unique<ppgso::Mesh>("objects/sphere.obj");
 }
 
 void Explosion::render(Scene &scene) {

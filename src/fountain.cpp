@@ -1,13 +1,9 @@
 //#include <glm/gtc/random.hpp>
-//#include "asteroid.h"
-//#include "projectile.h"
 //#include "explosion.h"
 
 #include "fountain.h"
-
 #include <shaders/diffuse_vert_glsl.h>
 #include <shaders/diffuse_frag_glsl.h>
-
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> Fountain::mesh;
@@ -83,9 +79,10 @@ bool Fountain::update(Scene &scene, float dt) {
 void Fountain::render(Scene &scene) {
   this->shader->use();
 
-  // Set up light
-  this->shader->setUniform("LightDirection", scene.lightDirection_);
-  this->shader->setUniform("LightDirection2", scene.lightDirection2_);
+    // Set up light
+    this->shader->setUniform("LightDirection", scene.lightDirection_);
+    this->shader->setUniform("lightColor", scene.lightColor_);
+    this->shader->setUniform("viewPos", scene.camera_->position);
 
   // use camera
   this->shader->setUniform("ProjectionMatrix", scene.camera_->projectionMatrix);

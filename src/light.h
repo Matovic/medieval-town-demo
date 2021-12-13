@@ -1,39 +1,30 @@
-#pragma once
+#ifndef Light_H
+#define Light_H
 
-#ifndef SUN_H
-#define SUN_H
-
-#include "./ppgso/ppgso.h"
-#include "./object.h"
+#include <ppgso/ppgso.h>
 #include "scene.h"
 #include "object.h"
 #include <string>
 
-using namespace ppgso;
-using namespace glm;
-
-class Sun final : public Object {
+class Light final : public Object {
 private:
   // Static resources (Shared between instances)
   // every object needs mesh, shader to render and texture
   static std::unique_ptr<ppgso::Mesh> mesh;
   static std::unique_ptr<ppgso::Shader> shader;
-  static std::unique_ptr<ppgso::Texture> texture;
 
 public:
-    Sun();
+    Light();
 
     bool update(Scene &scene, float dt) override;
 
     void render(Scene &scene) override;
 
-    bool animate(Scene &scene, float dt) override;
+    bool movementFront(Scene &scene, float dt);
 
-    virtual bool movementFront(Scene &scene, float dTime) override;
+    bool movementBack(Scene &scene, float dt);
 
-    virtual bool movementBack(Scene &scene, float dTime) override;
-
-    virtual bool floating(Scene &scene, float dt) override;
+    bool floating(Scene &scene, float dt);
     
         struct {
         float constant;
@@ -67,10 +58,9 @@ public:
         glm::vec3 diffuse;
         glm::vec3 specular;
     } dirLight;
-    glm::vec3 color = {1.0, 1.0, 1.0};
-
-//    void update_keyframe(Scene &scene, float dt) override;
+    glm::vec3 speed = {0.0f, 0.0f, 0.0f};
+    glm::vec3 color = {1.0f, 1.0f, 0.0f};
 };
 
 
-#endif //SUN_H
+#endif //Light_H

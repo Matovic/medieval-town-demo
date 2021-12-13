@@ -44,7 +44,8 @@ void Carpet::render(Scene &scene) {
 
     // Set up light
     this->shader->setUniform("LightDirection", scene.lightDirection_);
-    this->shader->setUniform("LightDirection2", scene.lightDirection2_);
+    this->shader->setUniform("lightColor", scene.lightColor_);
+    this->shader->setUniform("viewPos", scene.camera_->position);
 
     // use camera
     this->shader->setUniform("ProjectionMatrix", scene.camera_->projectionMatrix);

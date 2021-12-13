@@ -7,6 +7,7 @@
 
 #include "object.h"
 #include "camera.h"
+#include "light.h"
 
 /*
  * Scene is an object that will aggregate all scene related data
@@ -38,7 +39,7 @@ class Scene {
     std::unique_ptr<Camera> camera_;
 
     // All objects to be rendered in scene
-    std::list< std::unique_ptr<Object> > objects_;
+    std::list<std::unique_ptr<Object>> objects_;
 
     // TODO: Create more containers for objects that will not be interacting with each other
     // and we do not have to check it everytime in update method, e.g. snowball, water
@@ -48,14 +49,6 @@ class Scene {
     // know which keys were pressed
     std::map< int, int > keyboard_;
 
-    // Lights, in this case using only simple directional diffuse lighting
-    glm::vec3 lightDirection_{-5.0f, 5.0f, -5.0f};
-
-    // Lanother diffuze light
-    glm::vec3 lightDirection2_{5.0f, 2.0f, 5.0f};
-
-    // TODO: Define other lights here
-
     // Store cursor state
     struct {
       double x, y;
@@ -64,6 +57,14 @@ class Scene {
 
     bool firstScene_ = true;
     bool secondScene_ = false;
+
+    // Simple directional diffuse lighting
+    glm::vec3 lightDirection_{-5.0f, 5.0f, -5.0f};
+
+    // lightColor
+    glm::vec3 lightColor_{1.0f, 1.0f, 1.0f};
+
+    // TODO: Define other lights here
 };
 
 #endif // _PPGSO_SCENE_H

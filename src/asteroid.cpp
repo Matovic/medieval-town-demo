@@ -101,7 +101,9 @@ void Asteroid::render(Scene &scene) {
   shader->use();
 
   // Set up light
-  shader->setUniform("LightDirection", scene.lightDirection_);
+  this->shader->setUniform("LightDirection", scene.lightDirection_);
+  this->shader->setUniform("lightColor", scene.lightColor_);
+  this->shader->setUniform("viewPos", scene.camera_->position);
 
   // use camera
   shader->setUniform("ProjectionMatrix", scene.camera_->projectionMatrix);

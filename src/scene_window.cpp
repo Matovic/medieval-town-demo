@@ -18,7 +18,7 @@
 #include "scene.h"
 #include "scene_night.h"
 //#include "generator.h"
-#include "carpet.h"
+//#include "carpet.h"
 #include "sky.h"
 #include "fountain.h"
 #include "tower.h"
@@ -29,6 +29,7 @@
 #include "cauldron.h"
 //#include "cauldron_night.h"
 #include "apple_night.h"
+#include "light.h"
 
 /*!
 * Construct custom game window
@@ -50,8 +51,8 @@ SceneWindow::SceneWindow(const unsigned int& SIZE)
     glFrontFace(GL_CCW);
     glCullFace(GL_BACK);
 
-    //initScene();
-    this->initSceneNight();
+    this->initScene();
+    //this->initSceneNight();
 }
 
 /*!
@@ -70,6 +71,13 @@ void SceneWindow::initScene() {
 
     // Add space background
     this->scene_.objects_.push_back(std::make_unique<Sky>());
+
+    // Add light
+    auto light = std::make_unique<Light>();
+    light->position = glm::vec3{30.0f, 45.0f, -50.0f};
+    light->scale *= 5.0f;
+    light->speed = {-1.0f, -1.0f, 5.0f};
+    this->scene_.objects_.push_back(std::move(light));
 
     // Add floor
     auto floor = std::make_unique<Floor>();
