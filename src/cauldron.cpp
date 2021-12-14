@@ -24,8 +24,8 @@ Cauldron::Cauldron() {
 
     // keyframes
     // true, position, rotation, scale
-    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 1.2f, 25.3f), glm::vec3{0, 0, 1.5f}, this->scale, 1));
-    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 1.2f, 24.0f), glm::vec3{0, 0, 1.5f}, this->scale, 2));
+    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 1.2f, 25.3f), glm::vec3{0, 0, 1.5f}, this->scale, 30));
+    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 1.2f, 24.0f), glm::vec3{1.f, 5.f, 1.5f}, this->scale, 35));
 
     // create keyframes iterators
     this->currIterator = v_keyframe_.begin();
@@ -37,12 +37,12 @@ bool Cauldron::update(Scene &scene, float dt) {
     this->age += dt;
     if (this->keyframes_activated)
     {
-        this->keyframe_TTL += dt;
+        //this->keyframe_TTL += dt;
         //this->viewMatrix = lookAt(this->position, this->position - this->back + this->rotation, this->up);//this->position - this->back + this->rotation, this->up);
         auto currentKeyFrame = this->currIterator->get();
         auto nextKeyFrame = this->nextIterator->get();
 
-        if (this->keyframe_TTL >= (currentKeyFrame->time_ + 0.002f) && this->executedKeyFrames < this->v_keyframe_.size())
+        if (this->age >= (nextKeyFrame->time_ + 0.002f) && this->executedKeyFrames < this->v_keyframe_.size())
         {
             ++this->executedKeyFrames;
             ++this->currIterator;
@@ -50,11 +50,11 @@ bool Cauldron::update(Scene &scene, float dt) {
                 ++this->nextIterator;
         }
 
-        else if (this->executedKeyFrames == this->v_keyframe_.size())
+        /*else*/ if (this->executedKeyFrames == this->v_keyframe_.size())
         {
             auto explosion = std::make_unique<Explosion>();
             explosion->position = this->position;
-            explosion->scale = this->scale * 7.0f;
+            explosion->scale = this->scale;
             //explosion->speed_ = speed / 5.0f;
             scene.objects_.push_back(std::move(explosion));
             return false;
@@ -62,7 +62,7 @@ bool Cauldron::update(Scene &scene, float dt) {
 
         else
         {
-            float t = ((this->keyframe_TTL) / (currentKeyFrame->time_));
+            float t = ((this->age - currentKeyFrame->time_) / (nextKeyFrame->time_ - currentKeyFrame->time_));//((this->keyframe_TTL) / (currentKeyFrame->time_));
             //t /= 10;
             //std::cout << "t:" << t << std::endl;
 
@@ -74,7 +74,7 @@ bool Cauldron::update(Scene &scene, float dt) {
                         t  // interpolate by t
                     );
 
-            currentKeyFrame->modelMatrix = this->modelMatrix;
+            //currentKeyFrame->modelMatrix = this->modelMatrix;
 
             //std::cout << glm::to_string(this->viewMatrix) << std::endl;
             //std::cout << "Changed, " << glm::to_string(currentKeyFrame->viewMatrix_) << "\nnext " << glm::to_string(nextKeyFrame->viewMatrix_) << " keyframes: "  << this->executedKeyFrames << " age: " << this->age << " t: " << t << '\n';
@@ -92,10 +92,10 @@ void Cauldron::render(Scene &scene) {
     this->shader->use();
 
     // Set up materials
-    shader->setUniform("material.ambient",glm::vec3(0.2f, 0.2f, 0.2f));
-    shader->setUniform("material.diffuse", glm::vec3(10.0f, 10.0f, 10.0f));
-    shader->setUniform("material.specular", glm::vec3(1.0f, 1.0f, 1.0f));
-    shader->setUniform("material.shininess", 0.21794872f * 128.f * 16);
+    shader->setUniform("material.ambient",glm::vec3(0.2125f, 0.1275f, 0.054f));
+    shader->setUniform("material.diffuse", glm::vec3(0.714f, 0.4284f, 0.18144f));
+    shader->setUniform("material.specular", glm::vec3(0.393548f, 0.271906f, 0.166721f));
+    shader->setUniform("material.shininess", 0.2f);
 
 
     // Set up light

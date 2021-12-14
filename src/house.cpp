@@ -41,10 +41,10 @@ void House::render(Scene &scene) {
     this->shader->use();
 
     // Set up materials
-    shader->setUniform("material.ambient",glm::vec3(0.2f, 0.2f, 0.2f));
-    shader->setUniform("material.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
-    shader->setUniform("material.specular", glm::vec3(1.0f, 1.0f, 1.0f));
-    shader->setUniform("material.shininess", 32);
+    shader->setUniform("material.ambient",glm::vec3(0.02f, 0.17f, 0.02f));
+    shader->setUniform("material.diffuse", glm::vec3(0.07f, 0.61f, 0.07f));
+    shader->setUniform("material.specular", glm::vec3(0.63f, 0.73f, 0.63f));
+    shader->setUniform("material.shininess", .6);
 
 
     // Set up light

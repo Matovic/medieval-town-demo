@@ -130,7 +130,7 @@ void SceneWindow::initScene() {
 
     int market_count = 5;
     float z_offset = 0.0f;
-    float market_age = 3.0f;
+    float market_age = 9.0f;
     while (market_count != 0)
     {
         auto market = std::make_unique<Market>();
@@ -211,11 +211,14 @@ void SceneWindow::initScene() {
 * Creating unique smart pointers to objects that are stored in the scene object list
 */
 void SceneWindow::initSceneNight() {
-    // we no longer
-    //this->scene_.secondScene_ = true;
+    // we are in the night scene
+    this->scene_.secondScene_ = true;
 
     // clear scene if it already was run
     this->scene_.objects_.clear();
+
+    // clear lights
+    this->scene_.lights_.clear();
 
     // Delete camera
     //this->scene_.camera_.release();
@@ -327,8 +330,8 @@ void SceneWindow::onIdle() {
         this->scene_.firstScene_ = false;
 
     // if we have to traisnition to second scene
-    //if (!this->scene_.firstScene_ && !this->scene_.secondScene_)
-    //    this->initSceneNight();
+    if (!this->scene_.firstScene_ && !this->scene_.secondScene_)
+        this->initSceneNight();
 
     // Update and render all objects
     this->scene_.update(dt);

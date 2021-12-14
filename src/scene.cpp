@@ -5,8 +5,12 @@
  * @param time
  */
 void Scene::update(float time) {
-  this->camera_->update(time);
-
+  // camera returns if scene was done or not
+  if (this->camera_->update(time))
+  {
+      this->firstScene_ = false;
+      return;
+  }
   auto light_i = std::begin(this->lights_);
   while (light_i != std::end(this->lights_))
   {

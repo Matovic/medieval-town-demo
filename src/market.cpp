@@ -35,7 +35,7 @@ bool Market::update(Scene &scene, float dt) {
         // Generate explosion
         auto explosion = std::make_unique<Explosion>();
         explosion->position = this->position;
-        explosion->scale = this->scale * 5.0f;
+        explosion->scale = this->scale * 3.0f;
         //explosion->speed_ = speed / 2.0f;
         scene.objects_.push_back(move(explosion));
 

@@ -28,7 +28,7 @@ bool Apple::update(Scene &scene, float dt) {
     //   this->rotation += rotMomentum * dt;
     this->age_ += dt;
     this->rotation += this->rotMomentum * dt;
-    if (this->age_ > 15)
+    if (this->age_ > 28)
     {
         this->position += this->speed * dt;
 

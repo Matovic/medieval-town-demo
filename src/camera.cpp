@@ -20,17 +20,28 @@ Camera::Camera(float fow, float ratio, float near, float far, const bool firstSc
     if (firstScene)
     {
         // init
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -13), glm::vec3{0, 2, -12}, this->up, 0));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -15), glm::vec3{0, 2, -13}, this->up, 0));
         //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 0), glm::vec3{0, 2, 1}, this->up, 10));
 
         // fountain
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 2));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 3}, this->up, 7));
         // right
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(-2, 2, 5), glm::vec3{-3, 2, 6}, this->up, 3));
+        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(-2, 2, 5), glm::vec3{-3, 2, 6}, this->up, 3));
         // left
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(2, 2, 5), glm::vec3{3, 2, 6}, this->up, 4));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 2, 5), glm::vec3{5, 2, 6}, this->up, 9));
+
+        // forward
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(2, 2, 15), glm::vec3{3, 2, 16}, this->up, 12));
+
         // market center
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2.5, 23), glm::vec3{0, 1.5, 25}, this->up, 15));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 20), glm::vec3{0, 2, 21}, this->up, 15));
+
+        // apple
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 24), glm::vec3{0, 2, 25}, this->up, 30));
+
+        // back up
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 20), glm::vec3{0, 2, 21}, this->up, 35));
+
         //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2.5, 23), glm::vec3{0, 1.5, 25}, this->up, 1));
         // sun
         //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(2, 2.5, 23), glm::vec3{3, 4, 25}, this->up, 16));
@@ -79,7 +90,7 @@ Camera::Camera(float fow, float ratio, float near, float far, const bool firstSc
 /*!
  * Update Camera viewMatrix based on up, position and back vectors
  */
-void Camera::update(float dt) {
+bool Camera::update(float dt) {
     //if (position.z < -10)
     //this->position += this->speed * dt;
     //if (this->keyframe_->index < this->keyframe_->points.size())
@@ -100,12 +111,13 @@ void Camera::update(float dt) {
     }
 
     else if (this->executedKeyFrames == this->v_keyframe_.size())
-        return;
-
+    {
+        return true;
+    }
     else
     {
         float t = ((this->age - currentKeyFrame->time_) / (nextKeyFrame->time_ - currentKeyFrame->time_));
-        t /= 10;
+        //t /= 10;
 
         this->viewMatrix = currentKeyFrame->viewMatrix_;
         this->viewMatrix = glm::interpolate
@@ -115,11 +127,12 @@ void Camera::update(float dt) {
                     t  // interpolate by t
                 );
 
-        currentKeyFrame->viewMatrix_ = this->viewMatrix;
+        //currentKeyFrame->viewMatrix_ = this->viewMatrix;
 
         //std::cout << glm::to_string(this->viewMatrix) << std::endl;
         //std::cout << "Changed, " << glm::to_string(currentKeyFrame->viewMatrix_) << "\nnext " << glm::to_string(nextKeyFrame->viewMatrix_) << " keyframes: "  << this->executedKeyFrames << " age: " << this->age << " t: " << t << '\n';
     }
+    return false;
 }
 
 /*!

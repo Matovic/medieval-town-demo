@@ -49,7 +49,7 @@ public:
   /*!
    * Update Camera viewMatrix based on up, position and back vectors
    */
-  void update(float dt);
+  bool update(float dt);
 
   /*!
    * Get direction vector in world coordinates through camera projection plane

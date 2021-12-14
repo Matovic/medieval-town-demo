@@ -82,10 +82,10 @@ void CauldronNight::render(Scene &scene) {
     this->shader->use();
 
     // Set up materials
-    shader->setUniform("material.ambient",glm::vec3(0.2f, 0.2f, 0.2f));
-    shader->setUniform("material.diffuse", glm::vec3(10.0f, 10.0f, 10.0f));
-    shader->setUniform("material.specular", glm::vec3(1.0f, 1.0f, 1.0f));
-    shader->setUniform("material.shininess", 0.21794872f * 128.f * 16);
+    shader->setUniform("material.ambient",glm::vec3(0.2125f, 0.1275f, 0.054f));
+    shader->setUniform("material.diffuse", glm::vec3(0.714f, 0.4284f, 0.18144f));
+    shader->setUniform("material.specular", glm::vec3(0.393548f, 0.271906f, 0.166721f));
+    shader->setUniform("material.shininess", 0.2f);
 
 
     // Set up light
