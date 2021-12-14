@@ -3,9 +3,10 @@
 
 
 #include <ppgso/ppgso.h>
-
+#include <list>
 #include "scene.h"
 #include "object.h"
+#include "keyframe.h"
 
 /*!
  * Simple asteroid object
@@ -28,7 +29,7 @@ public:
     Cauldron();
 
     /*!
-     * Update tower
+     * Update
      * @param scene Scene to interact with
      * @param dt Time delta for animation purposes
      * @return
@@ -36,16 +37,26 @@ public:
     bool update(Scene &scene, float dt) override;
 
     /*!
-     * Render tower
+     * Render
      * @param scene Scene to render in
      */
     void render(Scene &scene) override;
+
+    // animate with keyfgrames
+    std::list<std::unique_ptr<KeyFrame>> v_keyframe_;
+    std::list<std::unique_ptr<KeyFrame>>::iterator currIterator;
+    std::list<std::unique_ptr<KeyFrame>>::iterator nextIterator;
+    size_t executedKeyFrames = 1;
+    bool keyframes_activated = false;
+    glm::vec3 scale{1.f,1.f,1.f};
 
 
     /*!
      * Rotational momentum
      */
     glm::vec3 rotMomentum;
+    float age = 0.0f;
+    float keyframe_TTL = 0.0f;
 };
 
 

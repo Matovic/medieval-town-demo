@@ -49,7 +49,9 @@ public:
     /*!
      * Rotational momentum
      */
-    glm::vec3 rotMomentum;
+    glm::vec3 rotMomentum = {1.0f, 0.5f, 0.0f};
+    glm::vec3 speed = {0.1f, -0.0981f, 0.0f};
+    float age_ = 0.0f;
 };
 
 

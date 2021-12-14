@@ -21,6 +21,8 @@ Camera::Camera(float fow, float ratio, float near, float far, const bool firstSc
     {
         // init
         this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -13), glm::vec3{0, 2, -12}, this->up, 0));
+        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 0), glm::vec3{0, 2, 1}, this->up, 10));
+
         // fountain
         this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 2));
         // right
@@ -29,8 +31,9 @@ Camera::Camera(float fow, float ratio, float near, float far, const bool firstSc
         this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(2, 2, 5), glm::vec3{3, 2, 6}, this->up, 4));
         // market center
         this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2.5, 23), glm::vec3{0, 1.5, 25}, this->up, 15));
+        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2.5, 23), glm::vec3{0, 1.5, 25}, this->up, 1));
         // sun
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(2, 2.5, 23), glm::vec3{3, 4, 25}, this->up, 16));
+        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(2, 2.5, 23), glm::vec3{3, 4, 25}, this->up, 16));
         // bird view
 //        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 30, 6), glm::vec3{0, 10, 12}, this->up, 16));
 
@@ -117,21 +120,6 @@ void Camera::update(float dt) {
         //std::cout << glm::to_string(this->viewMatrix) << std::endl;
         //std::cout << "Changed, " << glm::to_string(currentKeyFrame->viewMatrix_) << "\nnext " << glm::to_string(nextKeyFrame->viewMatrix_) << " keyframes: "  << this->executedKeyFrames << " age: " << this->age << " t: " << t << '\n';
     }
-    /*
-    if (this->key_pressed)
-    {
-        this->key_pressed = false;
-        this->viewMatrix = currentKeyFrame->viewMatrix_;
-        std::cout << "Changed, " << currentKeyFrame->time_ << " next " << nextKeyFrame->time_ << " keyframes: "  << this->executedKeyFrames << " age: " << this->age << " time: " << ((this->age - currentKeyFrame->time_) / (nextKeyFrame->time_ - currentKeyFrame->time_)) << '\n';
-        ++this->executedKeyFrames;
-        ++this->currIterator;
-        //if (this->executedKeyFrames < this->v_keyframe_.size() - 1)
-        //   ++this->nextIterator;
-    }*/
-    /*std::cout << "Prva\n";
-    std::cout << glm::to_string(this->viewMatrix) << '\n';
-    std::cout << "druha\n";
-    std::cout << glm::to_string(currentKeyFrame->viewMatrix_) << '\n';*/
 }
 
 /*!

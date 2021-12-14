@@ -54,22 +54,22 @@ in vec3 FragPos;
 // The final color
 out vec4 FragmentColor;
 
-vec3 CalculateLight(Light light, vec3 normal, vec3 viewDir, vec3 FragPos)
+vec3 CalculateLight(Light light, vec3 normal_, vec3 viewDir, vec3 FragPos)
 {
     // light direction
     vec3 lightDir = normalize(light.direction - FragPos);
     
     // diffuse shading
-    float diff = max(dot(normal, lightDir), 0.0);
+    float diff = max(dot(normal_, lightDir), 0.0);
     
     // specular shading
-    vec3 reflectDir = reflect(-lightDir, normal);
+    vec3 reflectDir = reflect(-lightDir, normal_);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     
     // combine results
     vec3 ambient  = light.color * light.ambient * material.ambient;
-    vec3 diffuse  = light.color * light.diffuse  * diff * material.diffuse;
-    vec3 specular = light.color * light.specular * spec * material.specular;
+    vec3 diffuse  = light.color * light.diffuse  * material.diffuse * diff;
+    vec3 specular = light.color * light.specular * material.specular * spec;
     return (ambient + diffuse + specular);
 }
 

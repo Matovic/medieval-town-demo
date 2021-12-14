@@ -79,10 +79,10 @@ void SceneWindow::initScene() {
     //sun->scale *= 5.0f;
     sun_light->lightDirection_= glm::vec3{30.0f, 45.0f, -50.0f};
     sun_light->lightColor_ = glm::vec3{1.0f, 1.0f, 1.0f};
-    sun_light->speed = glm::vec3{-1.0f, -1.0f, 5.0f};
-    sun_light->colorSpeed = glm::vec3{0.1f, 0.1f, 0.1f};
-    sun_light->ambient = glm::vec3{0.2f, 0.2f, 0.2f};
-    sun_light->diffuse = glm::vec3{0.05f, 0.05f, 0.05f};
+    sun_light->speed = glm::vec3{-1.0f, -1.0f, 3.0f};
+    sun_light->colorSpeed = glm::vec3{0.5f, 0.5f, 0.5f};
+    sun_light->ambient = glm::vec3{0.05f, 0.05f, 0.05f};
+    sun_light->diffuse = glm::vec3{0.02f, 0.02f, 0.01f};
     sun_light->specular = glm::vec3{0.01f, 0.01f, 0.01f};
     //auto sun_obj = std::make_move_iterator<Light>(sun);
     //this->scene_.objects_.push_back(sun);
@@ -90,7 +90,7 @@ void SceneWindow::initScene() {
 
     auto sun_ = std::make_unique<Sun>();
     sun_->position = glm::vec3{30.0f, 45.0f, -50.0f};
-    sun_->speed = glm::vec3{-1.0f, -1.0f, 5.0f};
+    sun_->speed = glm::vec3{-1.0f, -1.0f, 3.0f};
     sun_->scale *= 2.0f;
     this->scene_.objects_.push_back(std::move(sun_));
 
@@ -185,7 +185,7 @@ void SceneWindow::initScene() {
     }
 
     // Add lights on the houses
-    auto light = std::make_unique<Light>();
+    /*auto light = std::make_unique<Light>();
     light->lightDirection_ = {15.0f - (5.0f + 0.0f), 8.5f, 30.0f};
     //light->position.y =
     //light->scale *= 0.2f;
@@ -203,7 +203,7 @@ void SceneWindow::initScene() {
     lamp->color = {1.0f, 0.0f, 0.0f};
     lamp->scale *= 0.2f;
     lamp->colorSpeed = {-0.1f, 0.1f, 0.1f};
-    this->scene_.objects_.push_back(std::move(lamp));
+    this->scene_.objects_.push_back(std::move(lamp));*/
 }
 
 /*!

@@ -22,6 +22,9 @@ bool Light::update(float dt) {
     //scene.ambientStrength_ = 0.5f;
     //scene.specularStrength_ = 0.1f;
     //generateModelMatrix();
+    /*if (this->lightDirection_.z > 100)
+        this->lightDirection_ = {0.0f, -5.0f, 0.0f};*/
+    //std::cout << lightDirection_.x << ' ' << lightDirection_.y << ' ' << lightDirection_.z << ' ' << std::endl;
     return true;
 }
 

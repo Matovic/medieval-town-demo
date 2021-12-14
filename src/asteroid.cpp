@@ -60,9 +60,6 @@ bool Asteroid::update(Scene &scene, float dt) {
       // Too small to split into pieces
       if (scale.y < 0.5) pieces = 0;
 
-      // The projectile will be destroyed
-      //if (projectile) projectile->destroy();
-
       // Generate smaller asteroids
       explode(scene, (obj->position + position) / 2.0f, (obj->scale + scale) / 2.0f, pieces);
 

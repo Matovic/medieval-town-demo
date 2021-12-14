@@ -48,7 +48,8 @@ void Scene::render() {
  * @param direction - Direction to pick objects from
  * @return Objects - Vector of pointers to intersected objects
  */
-std::vector<Object*> Scene::intersect(const glm::vec3 &position, const glm::vec3 &direction) {
+/*std::vector<Object*> Scene::intersect(const glm::vec3 &position, const glm::vec3 &direction)
+{
   std::vector<Object*> intersected = {};
   for(auto& object : this->objects_) {
     // Collision with sphere of size object->scale.x
@@ -79,4 +80,4 @@ std::vector<Object*> Scene::intersect(const glm::vec3 &position, const glm::vec3
 
   // return vector of pointers of intersected objects
   return intersected;
-}
+}*/
