@@ -12,7 +12,7 @@ std::unique_ptr<ppgso::Mesh> Cauldron::mesh;
 std::unique_ptr<ppgso::Texture> Cauldron::texture;
 std::unique_ptr<ppgso::Shader> Cauldron::shader;
 
-Cauldron::Cauldron() {
+Cauldron::Cauldron(const bool& firstScene) {
     // Set scale and rotation
     this->scale *= 1.f;
     this->rotation ={0.0f, 0.0f, 1.5f};
@@ -24,10 +24,20 @@ Cauldron::Cauldron() {
 
     // keyframes
     // true, position, rotation, scale
-    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 1.2f, 25.3f), glm::vec3{0, 0, 1.5f}, glm::vec3{1.0f, 1.0f, 1.0f}, 30));
-    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 1.2f, 23.0f), glm::vec3{1.f, 5.f, 1.5f}, glm::vec3{1.0f, 1.0f, 1.0f}, 35));
-    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 10.f, 22.0f), glm::vec3{1.f, 5.f, 1.5f}, glm::vec3{10.0f, 10.0f, 10.0f}, 60));
-
+    if (firstScene)
+    {
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 1.2f, 25.3f), glm::vec3{0, 0, 1.5f}, glm::vec3{1.0f, 1.0f, 1.0f}, 33));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 1.2f, 23.0f), glm::vec3{1.f, 5.f, 1.5f}, glm::vec3{1.0f, 1.0f, 1.0f}, 40));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 10.f, 22.0f), glm::vec3{1.f, 5.f, 1.5f}, glm::vec3{1.0f, 1.0f, 1.0f}, 60));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 10.f, 22.0f), glm::vec3{1.f, 5.f, 1.5f}, glm::vec3{1.0f, 1.0f, 1.0f}, 70));
+    }
+    else
+    {
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 10.f, 22.0f), glm::vec3{1.f, 5.f, 1.5f}, glm::vec3{1.0f, 1.0f, 1.0f}, 0));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 2.0f, 23.0f), glm::vec3{1.f, 5.f, 1.5f}, glm::vec3{1.0f, 1.0f, 1.0f}, 20));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(7.f, 2.0f, 23.0f), glm::vec3{1.f, 5.f, 1.5f}, glm::vec3{1.0f, 1.0f, 1.0f}, 30));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(7.f, 2.0f, 15.0f), glm::vec3{1.f, 5.f, 1.5f}, glm::vec3{1.0f, 1.0f, 1.0f}, 40));
+    }
     // create keyframes iterators
     this->currIterator = v_keyframe_.begin();
     this->nextIterator = v_keyframe_.begin();

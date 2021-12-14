@@ -29,43 +29,11 @@ CauldronNight::CauldronNight()
 }
 
 bool CauldronNight::update(Scene &scene, float dt) {
-
-    // Rotate the object
-    // if (scene.camera_->position.z > -13 && scene.camera_->position.z < -1)
-    //   this->rotation += rotMomentum * dt;
-
-    // TODO: Collide with scene
-    /*for (auto &obj : scene.objects_) {
-        // Ignore self in scene
-        if (obj.get() == this) continue;
-
-        // We only need to collide with asteroids and projectiles, ignore other objects
-        //auto asteroid = dynamic_cast<Asteroid*>(obj.get()); // dynamic_pointer_cast<Asteroid>(obj);
-        //auto projectile = dynamic_cast<Projectile*>(obj.get()); //dynamic_pointer_cast<Projectile>(obj);
-        //if (!asteroid && !projectile) continue;
-
-        auto fountain = dynamic_cast<Fountain*>(obj.get());
-        if (!fountain) continue;
-
-        //std::cout << (distance(this->position, obj->position) > (obj->scale.y + this->scale.y) * 0.7f);
-
-        // Compare distance to approximate size of the asteroid estimated from scale.
-        if (distance(this->position, obj->position) < (obj->scale.y + this->scale.y) * 0.7f) {
-            //int pieces = 3;
-
-            // Generate explosion
-            auto explosion = std::make_unique<Explosion>();
-            explosion->position = (obj->position + this->position);
-            explosion->scale = (obj->scale + this->scale) * 10.0f;
-            //explosion->speed_ = speed / 2.0f;
-            scene.objects_.push_back(move(explosion));
-
-            // Destroy self
-            return false;
-        }
-    }*/
-
+    // hierarchy
     this->carpet->update(scene, dt);
+    this->age += dt;
+    if (age > 20)
+        return false;
 
     // Generate modelMatrix from position, rotation and scale
     //generateModelMatrix();

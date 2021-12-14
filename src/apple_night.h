@@ -47,5 +47,6 @@ public:
      * Rotational momentum
      */
     glm::vec3 rotMomentum;
+    float age = 0.0f;
 };
 #endif //MEDIEVAL_TOWN_DEMO_APPLE_NIGHT_H

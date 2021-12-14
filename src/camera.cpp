@@ -24,62 +24,63 @@ Camera::Camera(float fow, float ratio, float near, float far, const bool firstSc
         //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 0), glm::vec3{0, 2, 1}, this->up, 10));
 
         // fountain
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 3}, this->up, 7));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 3}, this->up, 10));
         // right
         //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(-2, 2, 5), glm::vec3{-3, 2, 6}, this->up, 3));
         // left
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 2, 5), glm::vec3{5, 2, 6}, this->up, 9));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 2, 5), glm::vec3{5, 2, 6}, this->up, 12));
 
         // forward
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(2, 2, 15), glm::vec3{3, 2, 16}, this->up, 12));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(2, 2, 15), glm::vec3{3, 2, 16}, this->up, 15));
 
         // market center
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 20), glm::vec3{0, 2, 21}, this->up, 15));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 20), glm::vec3{0, 2, 21}, this->up, 18));
 
         // apple
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 24), glm::vec3{0, 2, 25}, this->up, 30));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 24), glm::vec3{0, 2, 25}, this->up, 33));
 
         // back up
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 20), glm::vec3{0, 2, 21}, this->up, 35));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 20), glm::vec3{0, 2, 21}, this->up, 40));
 
         // look up
         this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 6, 20), glm::vec3{0, 7, 21}, this->up, 60));
-
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2.5, 23), glm::vec3{0, 1.5, 25}, this->up, 1));
-        // sun
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(2, 2.5, 23), glm::vec3{3, 4, 25}, this->up, 16));
-        // bird view
-//        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 30, 6), glm::vec3{0, 10, 12}, this->up, 16));
-
-      //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 1.5, -13), glm::vec3{0, 2, -12}, this->up, 2));
-    //  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 3), glm::vec3{0, 2, 6}, this->up, 1));
-    //    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 4), glm::vec3{0, 2, 6}, this->up, 2));
-    //    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 3));
-    //    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 6), glm::vec3{0, 2, 7}, this->up, 4));
-    //
-
-    //    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(-3, 2, 23), glm::vec3{-2, 2, 25}, this->up, 3));
-    //    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(3, 2, 23), glm::vec3{2, 2, 25}, this->up, 4));
-    //    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 4, 22), glm::vec3{0, -2, 25}, this->up, 5));
-
-    //  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 6}, this->up, 2));
-    //  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 6}, this->up, 3));
-
-    //  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 4, 14), glm::vec3{-5, 2, 15}, this->up, 5));
-    //  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 5), glm::vec3{0, 2, 6}, this->up, 7));
-    //  this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 4, 15), glm::vec3{4, 4, 16}, this->up, 10));
     }
 
     // set keyframes for Night scene
     else
     {
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3{0, 2, -13}, glm::vec3{0, 2, -12}, this->up, 0));
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3{0, 2, 24}, glm::vec3{0, 2, 25}, this->up, 5));
-        // init
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -15), glm::vec3{0, 2, -13}, this->up, 0));
+        // look up
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 6, 20), glm::vec3{0, 7, 21}, this->up, 0));
+
+        // back up
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 20), glm::vec3{0, 2, 21}, this->up, 20));
+
+        // apple
+        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 24), glm::vec3{0, 2, 25}, this->up, 27));
+
+        // market center
+        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 20), glm::vec3{0, 2, 21}, this->up, 42));
+
+        // forward
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(2, 2, 15), glm::vec3{3, 2, 16}, this->up, 40));
+
+        // left
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 2, 5), glm::vec3{5, 2, 6}, this->up, 48));
 
         // fountain
-        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 3}, this->up, 7));
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 3}, this->up, 50));
+
+        // init
+        this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -15), glm::vec3{0, 2, -13}, this->up, 60));
+        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 0), glm::vec3{0, 2, 1}, this->up, 10));
+
+        // right
+        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(-2, 2, 5), glm::vec3{-3, 2, 6}, this->up, 3));
+
+        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -15), glm::vec3{0, 2, -13}, this->up, 0));
+
+        // fountain
+        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 3}, this->up, 7));
         // right
         //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(-2, 2, 5), glm::vec3{-3, 2, 6}, this->up, 3));
         // left

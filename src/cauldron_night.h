@@ -48,5 +48,6 @@ public:
     glm::vec3 rotMomentum;
 
     std::unique_ptr<Carpet> carpet; // parent
+    float age = 0.0f;
 };
 #endif //MEDIEVAL_TOWN_DEMO_CAULDRON_NIGHT_H

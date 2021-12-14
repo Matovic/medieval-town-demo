@@ -41,6 +41,7 @@ public:
      * @param scene Scene to render in
      */
     void render(Scene &scene) override;
+    float age = 0.0f;
 
 protected:
     virtual void generateModelMatrix_child() {};

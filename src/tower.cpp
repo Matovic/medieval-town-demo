@@ -49,9 +49,9 @@ void Tower::render(Scene &scene) {
 
     // Set up materials
     shader->setUniform("material.ambient",glm::vec3(0.2f, 0.2f, 0.2f));
-    shader->setUniform("material.diffuse", glm::vec3(10.0f, 10.0f, 10.0f));
-    shader->setUniform("material.specular", glm::vec3(1.0f, 1.0f, 1.0f));
-    shader->setUniform("material.shininess", 0.21794872f * 128.f * 16);
+    shader->setUniform("material.diffuse", glm::vec3(5.0f, 5.0f, 5.0f));
+    shader->setUniform("material.specular", glm::vec3(0.01f, 0.01f, 0.01f));
+    shader->setUniform("material.shininess", 0.5);
 
 
     // Set up light

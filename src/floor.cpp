@@ -16,7 +16,7 @@ std::unique_ptr<ppgso::Shader> Floor::shader;
 
 Floor::Floor() {
     // Set random floor's scale
-    this->scale = {50.0f, 0.01f, 50.0f};
+    this->scale = {250.0f, 0.01f, 250.0f};
 
     // Initialize static resources if needed
     if (!this->shader) this->shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
@@ -25,16 +25,6 @@ Floor::Floor() {
 }
 
 bool Floor::update(Scene &scene, float dt) {
-    // Delete when alive longer than 10s or out of visibility
-    //if (this->age > 10.0f || this->position.y < -10)
-    //    return false;
-
-    // Collide with scene
-    //for (auto &obj : scene.objects_)
-        // Ignore self in scene
-    //    if (obj.get() == this)
-    //        continue;
-
     // Generate modelMatrix from position, rotation and scale
     generateModelMatrix();
 
@@ -47,9 +37,9 @@ void Floor::render(Scene &scene) {
 
     // Set up materials
     shader->setUniform("material.ambient",glm::vec3(0.2f, 0.2f, 0.2f));
-    shader->setUniform("material.diffuse", glm::vec3(10.0f, 10.0f, 10.0f));
+    shader->setUniform("material.diffuse", glm::vec3(5.0f, 5.0f, 5.0f));
     shader->setUniform("material.specular", glm::vec3(1.0f, 1.0f, 1.0f));
-    shader->setUniform("material.shininess", 0.21794872f * 128.f * 16);
+    shader->setUniform("material.shininess", 0.25);
 
 
     // Set up light

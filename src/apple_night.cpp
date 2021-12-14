@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/euler_angles.hpp>
 #include <glm/gtx/transform.hpp>
-
+#include "explosion.h"
 
 
 // Static resources
@@ -28,48 +28,17 @@ AppleNight::AppleNight()
 }
 
 bool AppleNight::update(Scene &scene, float dt) {
-
-    // Rotate the object
-    // if (scene.camera_->position.z > -13 && scene.camera_->position.z < -1)
-    //   this->rotation += rotMomentum * dt;
-
-    // TODO: Collide with scene
-    /*for (auto &obj : scene.objects_) {
-        // Ignore self in scene
-        if (obj.get() == this) continue;
-
-        // We only need to collide with asteroids and projectiles, ignore other objects
-        //auto asteroid = dynamic_cast<Asteroid*>(obj.get()); // dynamic_pointer_cast<Asteroid>(obj);
-        //auto projectile = dynamic_cast<Projectile*>(obj.get()); //dynamic_pointer_cast<Projectile>(obj);
-        //if (!asteroid && !projectile) continue;
-
-        auto fountain = dynamic_cast<Fountain*>(obj.get());
-        if (!fountain) continue;
-
-        //std::cout << (distance(this->position, obj->position) > (obj->scale.y + this->scale.y) * 0.7f);
-
-        // Compare distance to approximate size of the asteroid estimated from scale.
-        if (distance(this->position, obj->position) < (obj->scale.y + this->scale.y) * 0.7f) {
-            //int pieces = 3;
-
-            // Generate explosion
-            auto explosion = std::make_unique<Explosion>();
-            explosion->position = (obj->position + this->position);
-            explosion->scale = (obj->scale + this->scale) * 10.0f;
-            //explosion->speed_ = speed / 2.0f;
-            scene.objects_.push_back(move(explosion));
-
-            // Destroy self
-            return false;
-        }
-    }*/
-
     // update parent
     //glm::vec3 speed{1.f, 1.f, -2.f};
     //this->position *= speed;
     //this->cauldron->position *= speed;
     //this->cauldron->carpet->position *= speed;
     this->cauldron->update(scene, dt);
+    this->age += dt;
+    if (age > 20)
+    {
+        return false;
+    }
 
     // Generate modelMatrix from position, rotation and scale
     //generateModelMatrix();
@@ -87,9 +56,9 @@ void AppleNight::render(Scene &scene) {
 
     // Set up materials
     shader->setUniform("material.ambient",glm::vec3(0.2f, 0.2f, 0.2f));
-    shader->setUniform("material.diffuse", glm::vec3(10.0f, 10.0f, 10.0f));
-    shader->setUniform("material.specular", glm::vec3(1.0f, 1.0f, 1.0f));
-    shader->setUniform("material.shininess", 0.21794872f * 128.f * 16);
+    shader->setUniform("material.diffuse", glm::vec3(2.0f, 2.0f, 2.0f));
+    shader->setUniform("material.specular", glm::vec3(.1f, .1f, .1f));
+    shader->setUniform("material.shininess", 0.75);
 
     // Set up light
     shader->setUniform("viewPos", scene.camera_->position);

@@ -9,7 +9,7 @@
 #include "keyframe.h"
 
 /*!
- * Simple asteroid object
+ * Simple Cauldron object
  * This sphere object represents an instance of mesh geometry
  * It initializes and loads all resources only once
  * It will move down along the Y axis and self delete when reaching below -10
@@ -24,9 +24,9 @@ private:
 
 public:
     /*!
-     * Create new asteroid
+     * Create new cauldron
      */
-    Cauldron();
+    Cauldron(const bool& firstScene = true);
 
     /*!
      * Update
