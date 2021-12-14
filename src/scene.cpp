@@ -6,11 +6,8 @@
  */
 void Scene::update(float time) {
   // camera returns if scene was done or not
-  if (this->camera_->update(time))
-  {
-      this->firstScene_ = false;
-      return;
-  }
+  bool changeScene = this->camera_->update(time);
+
   auto light_i = std::begin(this->lights_);
   while (light_i != std::end(this->lights_))
   {
@@ -34,6 +31,12 @@ void Scene::update(float time) {
       i = this->objects_.erase(i); // NOTE: no need to call destructors as we store shared pointers in the scene
     else
       ++i;
+  }
+
+  if (changeScene)
+  {
+      this->firstScene_ = false;
+      return;
   }
 }
 

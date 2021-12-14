@@ -13,11 +13,12 @@ Sun::Sun()
 }
 
 bool Sun::update(Scene &scene, float dt) {
-    this->position += this->speed * dt;
+    if (this->position.y > 0.15)
+        this->position += this->speed * dt;
     this->color += this->colorSpeed * dt;
-    //scene.lightDirection_ = this->position;
-    //scene.ambientStrength_ = 0.5f;
-    //scene.specularStrength_ = 0.1f;
+    this->age += dt;
+    if (this->final_age > 0 && this->age > this->final_age)
+        return false;
     generateModelMatrix();
     return true;
 }

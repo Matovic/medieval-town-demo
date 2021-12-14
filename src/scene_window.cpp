@@ -35,8 +35,8 @@
 /*!
 * Construct custom game window
 */
-SceneWindow::SceneWindow(const unsigned int& SIZE)
-    : Window{"Medieval Town", static_cast<int>(SIZE), static_cast<int>(SIZE)} {
+SceneWindow::SceneWindow(const unsigned int& height, const unsigned int& width)
+    : Window{"Medieval Town", static_cast<int>(height), static_cast<int>(width)} {
     //hideCursor();
 
     // bind keys to window
@@ -64,11 +64,14 @@ void SceneWindow::initScene() {
     // clear scene if it already was run
     this->scene_.objects_.clear();
 
+    // clear lights
+    this->scene_.lights_.clear();
+
     // Create a camera
     auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
     //camera->position.y = 1.5f;
     //camera->position.z = -15.0f;
-    this->scene_.camera_ = move(camera);
+    this->scene_.camera_ = std::move(camera);
 
     // Add space background
     this->scene_.objects_.push_back(std::make_unique<Sky>());
@@ -81,7 +84,7 @@ void SceneWindow::initScene() {
     sun_light->lightColor_ = glm::vec3{1.0f, 1.0f, 1.0f};
     sun_light->speed = glm::vec3{-1.0f, -1.0f, 3.0f};
     sun_light->colorSpeed = glm::vec3{0.5f, 0.5f, 0.5f};
-    sun_light->ambient = glm::vec3{0.05f, 0.05f, 0.05f};
+    sun_light->ambient = glm::vec3{0.08f, 0.08f, 0.08f};
     sun_light->diffuse = glm::vec3{0.02f, 0.02f, 0.01f};
     sun_light->specular = glm::vec3{0.01f, 0.01f, 0.01f};
     //auto sun_obj = std::make_move_iterator<Light>(sun);
@@ -125,7 +128,7 @@ void SceneWindow::initScene() {
     auto market1 = std::make_unique<Market>();
     market1->position = {1.f, 0.0f, 25.0f};
     market1->rotation = {0.0f, 0.0f, ppgso::PI * 1.f};
-    market1->final_age_ = -1.0f;
+    market1->final_age_ = 40.0f;//-1.0f;
     this->scene_.objects_.push_back(move(market1));
 
     int market_count = 5;
@@ -237,6 +240,26 @@ void SceneWindow::initSceneNight() {
     floor->position = {0.0f, -0.01f, 12.0f};
     this->scene_.objects_.push_back(move(floor));
 
+    // Add moon
+    auto moon_light = std::make_unique<Light>();
+    //sun->position = glm::vec3{30.0f, 45.0f, -50.0f};
+    //sun->scale *= 5.0f;
+    moon_light->lightDirection_= glm::vec3{10.0f, 10.0f, 40.0f};
+    moon_light->lightColor_ = glm::vec3{1.0f, 1.0f, 1.0f};
+    moon_light->speed = glm::vec3{-1.0f, -0.2f, 0.0f};
+    moon_light->colorSpeed = glm::vec3{0.5f, 0.5f, 0.5f};
+    moon_light->ambient = glm::vec3{0.05f, 0.05f, 0.05f};
+    moon_light->diffuse = glm::vec3{0.02f, 0.02f, 0.01f};
+    moon_light->specular = glm::vec3{0.01f, 0.01f, 0.01f};
+    this->scene_.lights_.push_back(std::move(moon_light));
+
+    auto moon = std::make_unique<Sun>();
+    moon->position = glm::vec3{10.0f, 10.0f, 40.0f};
+    moon->color = {1.0f, 1.0f, 1.0f};
+    moon->speed = glm::vec3{-1.0f, -0.2f, 0.0f};
+    moon->scale *= 2.0f;
+    this->scene_.objects_.push_back(std::move(moon));
+
     float x_offset = 0.0f;
     // add towers
     for (unsigned int i = 0; i < 3; ++i, x_offset += 5.0f)
@@ -259,24 +282,38 @@ void SceneWindow::initSceneNight() {
     fountain->position = {0.0f, 0.0f, 15.0f};
     this->scene_.objects_.push_back(move(fountain));
 
-    // Add carpet
-    //auto carpet = std::make_unique<Carpet>();
-    //carpet->final_age_ = -1.0f;
-    //this->scene_.objects_.push_back(move(carpet));
+    // Add lights
+    for (int i = 0; i < 20; ++i)
+    {
+        glm::vec3 lightColor{0.05 + 0.10 * (sin(dt * 1.20)), 0.95 + 0.25 * (sin(dt * 1.20)), 0.05 + 0.25 * (sin(dt * 1.20))};
+        /*lightColor.x = 0.75 + 0.10 * (sin(dt * 1.20));
+        lightColor.y = 0.95 + 0.25 * (sin(dt * 1.20)); // Svetlo Bude trosku viac zelensie a modrejsie, menej cervene
+        lightColor.z = 0.95 + 0.25 * (sin(dt * 1.20));*/
+        auto light = std::make_unique<Light>();
+        float x_rand = glm::linearRand(-10.0f, 10.0f);
+        float z_rand = glm::linearRand(0.0f, 30.0f);
+        light->lightDirection_ = {x_rand, 15.0f, z_rand};
+        light->speed = {0.1f, -0.981f, 0.0f};
+        //light->color = {1.0f, 0.0f, 0.0f};
+        light->lightColor_ = lightColor;
+        light->colorSpeed = {-0.1f, 0.1f, 0.1f};
+        light->ambient = {0.02f, 0.02f, 0.02f};
+        light->diffuse = {.05f, .05f, .05f};
+        light->specular = {0.01f, 0.01f, 0.01f};
+        this->scene_.lights_.push_back(std::move(light));
 
-    // Add cauldron
-    //auto cauldron = std::make_unique<CauldronNight>();
-    //cauldron->position = {0.0f, 0.5f, 0.5f};
-    //cauldron->rotation = {0.0f, 0.0f, ppgso::PI * 1.f};
-    //auto carpet = cauldron->carpet;
-    //this->scene_.objects_.push_back(std::move(carpet));
-    //this->scene_.objects_.push_back(move(cauldron));
+        auto lamp = std::make_unique<Sun>();
+        lamp->position = glm::vec3{x_rand, 15.0f, z_rand};
+        lamp->speed = {0.1f, -0.981f, 0.0f};
+        lamp->color = lightColor;
+        lamp->scale *= 0.2f;
+        lamp->colorSpeed = {-0.1f, 0.1f, 0.1f};
+        this->scene_.objects_.push_back(std::move(lamp));
+    }
 
-    // Add apple
-    auto apple = std::make_unique<AppleNight>();
-    //apple->position = {0.0f, 2.0f, 25.0f};
-    //apple->rotation = {0.0f, 0.0f, ppgso::PI * 1.f};
-    this->scene_.objects_.push_back(move(apple));
+    // Add apple, cauldron & carpet with hierarchical transformations
+    //auto hierarchy = ;
+    this->scene_.objects_.push_back(std::make_unique<AppleNight>());
 
     // add houses
     float z_offset = 0.0f;
@@ -301,11 +338,6 @@ void SceneWindow::initSceneNight() {
         house->rotation = {0.0f, 0.0f, ppgso::PI};
         this->scene_.objects_.push_back(move(house));
     }
-
-    // Add generator to scene
-    //auto generator = std::make_unique<Generator>();
-    //generator->position.y = 10.0f;
-    //this->scene_.objects_.push_back(move(generator));
 }
 
 /*!

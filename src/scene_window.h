@@ -29,7 +29,7 @@ public:
   /*!
    * Construct custom game window
    */
-  SceneWindow(const unsigned int&);
+  SceneWindow(const unsigned int& height, const unsigned int& width);
 
   /*!
    * Window update implementation that will be called automatically from pollEvents

@@ -18,46 +18,6 @@ public:
 
     bool update(float dt);
 
-    //void render(Scene &scene) override;
-
-    /*bool movementFront(Scene &scene, float dt);
-
-    bool movementBack(Scene &scene, float dt);
-
-    bool floating(Scene &scene, float dt);
-    
-        struct {
-        float constant;
-        float linear;
-        float quadratic;
-        
-        glm::vec3 ambient;
-        glm::vec3 diffuse;
-        glm::vec3 specular;
-        glm::vec3 position;
-    } pointLight;
-
-    struct {
-        float cutOff;
-        float outerCutOff;
-        float constant;
-        float linear;
-        float quadratic;
-
-        glm::vec3 position;
-        glm::vec3 direction;
-        glm::vec3 ambient;
-        glm::vec3 diffuse;
-        glm::vec3 specular;
-    } spotLight;
-
-
-    struct {
-        glm::vec3 direction;
-        glm::vec3 ambient;
-        glm::vec3 diffuse;
-        glm::vec3 specular;
-    } dirLight;*/
     glm::vec3 speed = {0.0f, 0.0f, 0.0f};
     glm::vec3 colorSpeed = {0.0f, 0.0f, 0.0f};
     // lightColor
@@ -68,6 +28,8 @@ public:
     glm::vec3 ambient;
     glm::vec3 diffuse;
     //glm::vec3 color = {1.0f, 1.0f, 0.0f};
+    float age = 0.0f;
+    float final_age = -1.0f;
 };
 
 

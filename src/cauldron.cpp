@@ -24,8 +24,9 @@ Cauldron::Cauldron() {
 
     // keyframes
     // true, position, rotation, scale
-    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 1.2f, 25.3f), glm::vec3{0, 0, 1.5f}, this->scale, 30));
-    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 1.2f, 24.0f), glm::vec3{1.f, 5.f, 1.5f}, this->scale, 35));
+    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 1.2f, 25.3f), glm::vec3{0, 0, 1.5f}, glm::vec3{1.0f, 1.0f, 1.0f}, 30));
+    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 1.2f, 23.0f), glm::vec3{1.f, 5.f, 1.5f}, glm::vec3{1.0f, 1.0f, 1.0f}, 35));
+    this->v_keyframe_.push_back(std::make_unique<KeyFrame>(true, glm::vec3(0.f, 10.f, 22.0f), glm::vec3{1.f, 5.f, 1.5f}, glm::vec3{10.0f, 10.0f, 10.0f}, 60));
 
     // create keyframes iterators
     this->currIterator = v_keyframe_.begin();

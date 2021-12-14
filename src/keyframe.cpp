@@ -16,7 +16,7 @@ KeyFrame::KeyFrame(const bool& isCauldron, const glm::vec3& position, const glm:
     : position{std::move(position)}, rotation{std::move(rotation)}, scale{std::move(scale)}, time_{time}
 {
     this->modelMatrix =
-            glm::translate(glm::mat4(1.0f), position)
-            * glm::orientate4(rotation)
-            * glm::scale(glm::mat4(1.0f), scale);
+            glm::translate(glm::mat4(1.0f), this->position)
+            * glm::orientate4(this->rotation)
+            * glm::scale(glm::mat4(1.0f), this->scale);
 }

@@ -46,7 +46,7 @@ public:
     std::list<std::unique_ptr<KeyFrame>> v_keyframe_;
     std::list<std::unique_ptr<KeyFrame>>::iterator currIterator;
     std::list<std::unique_ptr<KeyFrame>>::iterator nextIterator;
-    size_t executedKeyFrames = 1;
+    size_t executedKeyFrames = 0;
     bool keyframes_activated = false;
     glm::vec3 scale{1.f,1.f,1.f};
 

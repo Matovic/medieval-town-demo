@@ -11,7 +11,8 @@
 #include "scene_window.h"
 
 // set size of a window
-const unsigned int SIZE = 1024;
+//const unsigned int HEIGHT = 1920;
+const unsigned int WIDTH = 1400;//1080;
 
 int main() {
   //std::cout << get_current_dir_name() << '\n';
@@ -23,7 +24,7 @@ int main() {
   //  while (std::system("cd ./cmake-build/") < 0);
   //std::cout << get_current_dir_name() << '\n';
   // Initialize our window
-  SceneWindow window{SIZE};
+  SceneWindow window{WIDTH, WIDTH};
 
   // Main execution loop
   while (window.pollEvents()) {}

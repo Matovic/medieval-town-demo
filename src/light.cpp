@@ -13,18 +13,13 @@ Light::Light()
 }
 
 bool Light::update(float dt) {
-    //this->position += this->speed * dt;
+    if (this->lightDirection_.y > 0)
+        this->lightDirection_ += this->speed * dt;
     this->lightDirection_ += this->speed * dt;
     this->lightColor_ += this->colorSpeed * dt;
-    //this->color += this->colorSpeed * dt;
-    //scene.lightColor_ = this->lightColor_;
-    //scene.lightDirection_ = this->position;
-    //scene.ambientStrength_ = 0.5f;
-    //scene.specularStrength_ = 0.1f;
-    //generateModelMatrix();
-    /*if (this->lightDirection_.z > 100)
-        this->lightDirection_ = {0.0f, -5.0f, 0.0f};*/
-    //std::cout << lightDirection_.x << ' ' << lightDirection_.y << ' ' << lightDirection_.z << ' ' << std::endl;
+    this->age += dt;
+    if (this->final_age > 0 && this->age > this->final_age)
+        return false;
     return true;
 }
 
