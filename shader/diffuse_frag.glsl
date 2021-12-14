@@ -8,7 +8,7 @@ struct Material {
 };   
 uniform Material material;
 
-#define NO_LIGHTS 10  
+#define NO_LIGHTS 100  
 struct Light {
     vec3 direction;
     vec3 color;
@@ -57,7 +57,7 @@ out vec4 FragmentColor;
 vec3 CalculateLight(Light light, vec3 normal_, vec3 viewDir, vec3 FragPos)
 {
     // light direction
-    vec3 lightDir = normalize(light.direction - FragPos);
+    vec3 lightDir = normalize(-light.direction); //- FragPos);
     
     // diffuse shading
     float diff = max(dot(normal_, lightDir), 0.0);

@@ -17,8 +17,6 @@
 #include "keyframe.h"
 #include "scene.h"
 #include "scene_night.h"
-//#include "generator.h"
-//#include "carpet.h"
 #include "sky.h"
 #include "fountain.h"
 #include "tower.h"
@@ -27,7 +25,6 @@
 #include "house.h"
 #include "apple.h"
 #include "cauldron.h"
-//#include "cauldron_night.h"
 #include "apple_night.h"
 #include "light.h"
 #include "sun.h"
@@ -76,9 +73,9 @@ void SceneWindow::initScene() {
 
     // Add sun
     auto sun_light = std::make_unique<Light>();
-    sun_light->lightDirection_= glm::vec3{20.0f, 25.0f, -50.0f};
+    sun_light->lightDirection_= glm::vec3{0.0f, 20.0f, 5.0f};
     sun_light->lightColor_ = glm::vec3{1.0f, 1.0f, 1.0f};
-    sun_light->speed = glm::vec3{-1.0f, -1.0f, 3.0f};
+    sun_light->speed = glm::vec3{.0f, .0f, 1.0f};
     sun_light->colorSpeed = glm::vec3{0.5f, 0.5f, 0.5f};
     sun_light->ambient = glm::vec3{0.08f, 0.08f, 0.08f};
     sun_light->diffuse = glm::vec3{0.02f, 0.02f, 0.01f};
@@ -88,8 +85,8 @@ void SceneWindow::initScene() {
     this->scene_.lights_.push_back(std::move(sun_light));
 
     auto sun_ = std::make_unique<Sun>();
-    sun_->position = glm::vec3{20.0f, 25.0f, -50.0f};//30.0f, 45.0f, -50.0f};
-    sun_->speed = glm::vec3{-1.0f, -1.0f, 3.0f};
+    sun_->position = glm::vec3{0.0f, 20.0f, 5.0f};//30.0f, 45.0f, -50.0f};
+    sun_->speed = glm::vec3{.0f, .0f, 1.0f};
     sun_->scale *= 2.0f;
     this->scene_.objects_.push_back(std::move(sun_));
 
@@ -216,11 +213,9 @@ void SceneWindow::initSceneNight() {
 
     // Add moon
     auto moon_light = std::make_unique<Light>();
-    //sun->position = glm::vec3{30.0f, 45.0f, -50.0f};
-    //sun->scale *= 5.0f;
-    moon_light->lightDirection_= glm::vec3{10.0f, 10.0f, 40.0f};
+    moon_light->lightDirection_= glm::vec3{0.0f, 20.0f, 65.0f};
     moon_light->lightColor_ = glm::vec3{1.0f, 1.0f, 1.0f};
-    moon_light->speed = glm::vec3{-1.0f, -0.2f, 0.0f};
+    moon_light->speed = glm::vec3{0.0f, 0.0f, -1.0f};
     moon_light->colorSpeed = glm::vec3{0.5f, 0.5f, 0.5f};
     moon_light->ambient = glm::vec3{0.05f, 0.05f, 0.05f};
     moon_light->diffuse = glm::vec3{0.02f, 0.02f, 0.01f};
@@ -228,9 +223,9 @@ void SceneWindow::initSceneNight() {
     this->scene_.lights_.push_back(std::move(moon_light));
 
     auto moon = std::make_unique<Sun>();
-    moon->position = glm::vec3{10.0f, 10.0f, 40.0f};
+    moon->position = glm::vec3{0.0f, 20.0f, 65.0f};
     moon->color = {1.0f, 1.0f, 1.0f};
-    moon->speed = glm::vec3{-1.0f, -0.2f, 0.0f};
+    moon->speed = glm::vec3{0.0f, 0.0f, -1.0f};
     moon->scale *= 2.0f;
     this->scene_.objects_.push_back(std::move(moon));
 
@@ -261,24 +256,41 @@ void SceneWindow::initSceneNight() {
     fountain->position = {0.0f, 0.0f, 15.0f};
     this->scene_.objects_.push_back(move(fountain));
 
-    // Add lights behind towers
-    for (int i = 0; i < 100; ++i)
+    // Add lights everywhere
+    for (int i = 0; i < 99; ++i)
     {
         glm::vec3 lightColor{0.05 + 0.10 * (sin(dt * 1.20)), 0.95 + 0.25 * (sin(dt * 1.20)), 0.05 + 0.25 * (sin(dt * 1.20))};
         glm::vec3 colorSpeed{glm::linearRand(-1.0f, 1.0f), glm::linearRand(-1.0f, 1.0f), glm::linearRand(-1.0f, 1.0f)};
         auto light = std::make_unique<Light>();
+        float x_rand = glm::linearRand(-10.0f, 10.0f);
+        float z_rand = glm::linearRand(0.0f, 35.0f);
+        float y_speed_rand = glm::linearRand(-1.0f, -0.1f);
+        light->lightDirection_ = {x_rand, 25.0f, z_rand};
+        light->speed = {0.1f, y_speed_rand, 0.0f};//-0.981f, 0.0f};
+        light->lightColor_ = lightColor;
+        light->colorSpeed = colorSpeed;
+        light->ambient = {0.002f, 0.002f, 0.002f};
+        light->diffuse = {0.0005f, 0.0005f, 0.0005f};
+        light->specular = {0.001f, 0.001f, 0.001f};
+        this->scene_.lights_.push_back(std::move(light));
+
+        auto lamp = std::make_unique<Sun>();
+        lamp->position = glm::vec3{x_rand, 25.0f, z_rand};
+        lamp->speed = {0.1f, y_speed_rand, 0.0f};
+        lamp->color = lightColor;
+        lamp->scale *= 0.2f;
+        lamp->colorSpeed = colorSpeed;
+        this->scene_.objects_.push_back(std::move(lamp));
+    }
+
+    // Add balls behind towers
+    /*for (int i = 0; i < 10; ++i)
+    {
+        glm::vec3 lightColor{0.05 + 0.10 * (sin(dt * 1.20)), 0.95 + 0.25 * (sin(dt * 1.20)), 0.05 + 0.25 * (sin(dt * 1.20))};
+        glm::vec3 colorSpeed{glm::linearRand(-1.0f, 1.0f), glm::linearRand(-1.0f, 1.0f), glm::linearRand(-1.0f, 1.0f)};
         float x_rand = glm::linearRand(-30.0f, 30.0f);
         float z_rand = glm::linearRand(40.0f, 70.0f);
         float y_speed_rand = glm::linearRand(-1.0f, -0.1f);
-        light->lightDirection_ = {x_rand, 45.0f, z_rand};
-        light->speed = {0.1f, y_speed_rand, 0.0f};//-0.981f, 0.0f};
-        //light->color = {1.0f, 0.0f, 0.0f};
-        light->lightColor_ = lightColor;
-        light->colorSpeed = colorSpeed;
-        light->ambient = {0.02f, 0.02f, 0.02f};
-        light->diffuse = {.05f, .05f, .05f};
-        light->specular = {0.01f, 0.01f, 0.01f};
-        this->scene_.lights_.push_back(std::move(light));
 
         auto lamp = std::make_unique<Sun>();
         lamp->position = glm::vec3{x_rand, 25.0f, z_rand};
@@ -287,63 +299,7 @@ void SceneWindow::initSceneNight() {
         lamp->scale *= 0.2f;
         lamp->colorSpeed = colorSpeed;
         this->scene_.objects_.push_back(std::move(lamp));
-    }
-
-    // Add lights everywhere
-    for (int i = 0; i < 100; ++i)
-    {
-        glm::vec3 lightColor{0.05 + 0.10 * (sin(dt * 1.20)), 0.95 + 0.25 * (sin(dt * 1.20)), 0.05 + 0.25 * (sin(dt * 1.20))};
-        glm::vec3 colorSpeed{glm::linearRand(-1.0f, 1.0f), glm::linearRand(-1.0f, 1.0f), glm::linearRand(-1.0f, 1.0f)};
-        auto light = std::make_unique<Light>();
-        float x_rand = glm::linearRand(-10.0f, 10.0f);
-        float z_rand = glm::linearRand(0.0f, 22.0f);
-        float y_speed_rand = glm::linearRand(-1.0f, -0.1f);
-        light->lightDirection_ = {x_rand, 25.0f, z_rand};
-        light->speed = {0.1f, y_speed_rand, 0.0f};//-0.981f, 0.0f};
-        //light->color = {1.0f, 0.0f, 0.0f};
-        light->lightColor_ = lightColor;
-        light->colorSpeed = colorSpeed;
-        light->ambient = {0.02f, 0.02f, 0.02f};
-        light->diffuse = {.05f, .05f, .05f};
-        light->specular = {0.01f, 0.01f, 0.01f};
-        this->scene_.lights_.push_back(std::move(light));
-
-        auto lamp = std::make_unique<Sun>();
-        lamp->position = glm::vec3{x_rand, 25.0f, z_rand};
-        lamp->speed = {0.1f, y_speed_rand, 0.0f};
-        lamp->color = lightColor;
-        lamp->scale *= 0.2f;
-        lamp->colorSpeed = colorSpeed;
-        this->scene_.objects_.push_back(std::move(lamp));
-    }
-
-    // Add lights in left corner
-    for (int i = 0; i < 50; ++i)
-    {
-        glm::vec3 lightColor{0.05 + 0.10 * (sin(dt * 1.20)), 0.95 + 0.25 * (sin(dt * 1.20)), 0.05 + 0.25 * (sin(dt * 1.20))};
-        glm::vec3 colorSpeed{glm::linearRand(-1.0f, 1.0f), glm::linearRand(-1.0f, 1.0f), glm::linearRand(-1.0f, 1.0f)};
-        auto light = std::make_unique<Light>();
-        float x_rand = glm::linearRand(-10.0f, 5.0f);
-        float z_rand = glm::linearRand(15.0f, 30.0f);
-        float y_speed_rand = glm::linearRand(-1.0f, -0.1f);
-        light->lightDirection_ = {x_rand, 25.0f, z_rand};
-        light->speed = {0.1f, y_speed_rand, 0.0f};
-        //light->color = {1.0f, 0.0f, 0.0f};
-        light->lightColor_ = lightColor;
-        light->colorSpeed = colorSpeed;
-        light->ambient = {0.02f, 0.02f, 0.02f};
-        light->diffuse = {.05f, .05f, .05f};
-        light->specular = {0.01f, 0.01f, 0.01f};
-        this->scene_.lights_.push_back(std::move(light));
-
-        auto lamp = std::make_unique<Sun>();
-        lamp->position = glm::vec3{x_rand, 25.0f, z_rand};
-        lamp->speed = {0.1f, y_speed_rand, 0.0f};
-        lamp->color = lightColor;
-        lamp->scale *= 0.2f;
-        lamp->colorSpeed = colorSpeed;
-        this->scene_.objects_.push_back(std::move(lamp));
-    }
+    }*/
 
     // Add apple, cauldron & carpet with hierarchical transformations
     //auto hierarchy = ;
@@ -387,17 +343,17 @@ void SceneWindow::onIdle() {
 
     time = (float) glfwGetTime();
 
-    // Set gray background
-    glClearColor(.5f, .5f, .5f, 0);
-    // Clear depth and color buffers
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    if (!this->scene_.secondScene_ && this->scene_.camera_->position.z > 5)
-        this->scene_.firstScene_ = false;
+    /*if (!this->scene_.secondScene_ && this->scene_.camera_->position.z > 5)
+        this->scene_.firstScene_ = false;*/
 
     // if we have to traisnition to second scene
     if (!this->scene_.firstScene_ && !this->scene_.secondScene_)
         this->initSceneNight();
+
+    // Set gray background
+    glClearColor(.5f, .5f, .5f, 0);
+    // Clear depth and color buffers
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // Update and render all objects
     this->scene_.update(dt);

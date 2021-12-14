@@ -50,12 +50,12 @@ void Floor::render(Scene &scene) {
         /*glm::vec3 lighColor;
         lighColor.x = sin((glfwGetTime() + index) * 2.0f);
         lighColor.y = sin((glfwGetTime() + index) * 0.7f);
-        lighColor.z = sin((glfwGetTime() + index) * 1.3f);
+        lighColor.z = sin((glfwGetTime() + index) * 1.3f);*/
 
-        shader->setUniform("fluorescentColor", lighColor);
+        //shader->setUniform("fluorescentColor", lighColor);
 
         //obj->color = lighColor;
-        obj->lightColor_ = lighColor;*/
+        //obj->lightColor_ = lighColor;
         shader->setUniform("lights[" + std::to_string(index) + "].direction", obj->lightDirection_);
         shader->setUniform("lights[" + std::to_string(index) + "].ambient", obj->ambient);
         shader->setUniform("lights[" + std::to_string(index) + "].diffuse", obj->diffuse);
