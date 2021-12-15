@@ -29,10 +29,6 @@ AppleNight::AppleNight()
 
 bool AppleNight::update(Scene &scene, float dt) {
     // update parent
-    //glm::vec3 speed{1.f, 1.f, -2.f};
-    //this->position *= speed;
-    //this->cauldron->position *= speed;
-    //this->cauldron->carpet->position *= speed;
     this->cauldron->update(scene, dt);
     this->age += dt;
     if (age > 20)
@@ -41,8 +37,6 @@ bool AppleNight::update(Scene &scene, float dt) {
     }
 
     // Generate modelMatrix from position, rotation and scale
-    //generateModelMatrix();
-    //this->modelMatrix *= this->cauldron->modelMatrix;
     this->modelMatrix =
             glm::translate(glm::mat4(1.0f), this->position * this->cauldron->position * this->cauldron->carpet->position)
             * glm::orientate4(this->rotation)
@@ -54,26 +48,20 @@ bool AppleNight::update(Scene &scene, float dt) {
 void AppleNight::render(Scene &scene) {
     this->shader->use();
 
+    // Set bloom
+    this->shader->setUniform("bloom", true);
+
     // Set up materials
     shader->setUniform("material.ambient",glm::vec3(0.2f, 0.2f, 0.2f));
-    shader->setUniform("material.diffuse", glm::vec3(2.0f, 2.0f, 2.0f));
-    shader->setUniform("material.specular", glm::vec3(.1f, .1f, .1f));
-    shader->setUniform("material.shininess", 0.75);
+    shader->setUniform("material.diffuse", glm::vec3(10.0f, 10.0f, 10.0f));
+    shader->setUniform("material.specular", glm::vec3(1.0f, 1.0f, 1.0f));
+    shader->setUniform("material.shininess", 0.2);
 
     // Set up light
     shader->setUniform("viewPos", scene.camera_->position);
     size_t index = 0;
     for (auto& obj : scene.lights_)
     {
-        /*glm::vec3 lighColor;
-        lighColor.x = sin((glfwGetTime() + index) * 2.0f);
-        lighColor.y = sin((glfwGetTime() + index) * 0.7f);
-        lighColor.z = sin((glfwGetTime() + index) * 1.3f);
-
-        shader->setUniform("fluorescentColor", lighColor);
-
-        //obj->color = lighColor;
-        obj->lightColor_ = lighColor;*/
         shader->setUniform("light[" + std::to_string(index) + "].direction", obj->lightDirection_);
         shader->setUniform("light[" + std::to_string(index) + "].ambient", obj->ambient);
         shader->setUniform("light[" + std::to_string(index) + "].diffuse", obj->diffuse);

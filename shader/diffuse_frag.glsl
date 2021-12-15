@@ -42,6 +42,8 @@ uniform float Transparency;
 // (optional) Texture offset
 uniform vec2 TextureOffset;
 
+uniform bool bloom;
+
 // The vertex shader will feed this input
 in vec2 texCoord;
 
@@ -85,6 +87,22 @@ void main() {
   for(int i = 0; i < NO_LIGHTS; i++)
     result += CalculateLight(lights[i], norm, viewDir, FragPos);
   
-  FragmentColor = texture(Texture, vec2(texCoord.x, 1.0 - texCoord.y)+ TextureOffset) * vec4(result, 1.0);
+  FragmentColor = texture(Texture, vec2(texCoord.x, 1.0 - texCoord.y) + TextureOffset) * vec4(result, 1.0);
   FragmentColor.a = Transparency;
+  
+  // bloom
+  if(bloom)
+  {
+    const float gamma = 2.2;
+    float exposure = 0.4;
+    vec3 hdrColor = FragmentColor.rgb;
+    //sampler2D bloomBlur = 1;      
+    vec3 bloomColor = texture(Texture, vec2(texCoord.x, 1.0 - texCoord.y) + TextureOffset).rgb;
+    hdrColor += bloomColor; // additive blending
+    // tone mapping
+    vec3 bloomResult = vec3(1.0) - exp(-hdrColor * exposure);
+    // also gamma correct while we're at it       
+    bloomResult = pow(bloomResult, vec3(1.0 / gamma));
+    FragmentColor = vec4(bloomResult, 1.0);
+  }
 }

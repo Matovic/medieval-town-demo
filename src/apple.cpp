@@ -22,10 +22,6 @@ Apple::Apple() {
 }
 
 bool Apple::update(Scene &scene, float dt) {
-
-    // Rotate the object
-    // if (scene.camera_->position.z > -13 && scene.camera_->position.z < -1)
-    //   this->rotation += rotMomentum * dt;
     this->age_ += dt;
     this->rotation += this->rotMomentum * dt;
     if (this->age_ > 31)
@@ -40,8 +36,6 @@ bool Apple::update(Scene &scene, float dt) {
             // We only need to collide with cauldron, ignore other objects
             auto cauldron = dynamic_cast<Cauldron*>(obj.get());
             if (!cauldron) continue;
-
-            //std::cout << (distance(this->position, obj->position) > (obj->scale.y + this->scale.y) * 0.7f);
 
             // Compare distance to approximate size of the apple estimated from scale.
             if (distance(this->position, obj->position) < (obj->scale.y + this->scale.y) * 0.45f)
@@ -75,24 +69,15 @@ void Apple::render(Scene &scene) {
 
     // Set up materials
     shader->setUniform("material.ambient",glm::vec3(0.2f, 0.2f, 0.2f));
-    shader->setUniform("material.diffuse", glm::vec3(10.0f, 10.0f, 10.0f));
+    shader->setUniform("material.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
     shader->setUniform("material.specular", glm::vec3(1.0f, 1.0f, 1.0f));
-    shader->setUniform("material.shininess", 0.21794872f * 128.f * 16);
+    shader->setUniform("material.shininess", 1.0f);
 
     // Set up light
     shader->setUniform("viewPos", scene.camera_->position);
     size_t index = 0;
     for (auto& obj : scene.lights_)
     {
-        /*glm::vec3 lighColor;
-        lighColor.x = sin((glfwGetTime() + index) * 2.0f);
-        lighColor.y = sin((glfwGetTime() + index) * 0.7f);
-        lighColor.z = sin((glfwGetTime() + index) * 1.3f);
-
-        shader->setUniform("fluorescentColor", lighColor);
-
-        //obj->color = lighColor;
-        obj->lightColor_ = lighColor;*/
         shader->setUniform("lights[" + std::to_string(index) + "].direction", obj->lightDirection_);
         shader->setUniform("lights[" + std::to_string(index) + "].ambient", obj->ambient);
         shader->setUniform("lights[" + std::to_string(index) + "].diffuse", obj->diffuse);

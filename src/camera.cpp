@@ -72,42 +72,12 @@ Camera::Camera(float fow, float ratio, float near, float far, const bool firstSc
 
         // init
         this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -15), glm::vec3{0, 2, -13}, this->up, 60));
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 0), glm::vec3{0, 2, 1}, this->up, 10));
-
-        // right
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(-2, 2, 5), glm::vec3{-3, 2, 6}, this->up, 3));
-
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, -15), glm::vec3{0, 2, -13}, this->up, 0));
-
-        // fountain
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 2), glm::vec3{0, 2, 3}, this->up, 7));
-        // right
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(-2, 2, 5), glm::vec3{-3, 2, 6}, this->up, 3));
-        // left
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(4, 2, 5), glm::vec3{5, 2, 6}, this->up, 9));
-
-        // forward
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(2, 2, 15), glm::vec3{3, 2, 16}, this->up, 12));
-
-        // market center
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 20), glm::vec3{0, 2, 21}, this->up, 15));
-
-        // apple
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 24), glm::vec3{0, 2, 25}, this->up, 30));
-
-        // back up
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 2, 20), glm::vec3{0, 2, 21}, this->up, 35));
-
-        // look up
-        //this->v_keyframe_.push_back(std::make_unique<KeyFrame>(glm::vec3(0, 6, 20), glm::vec3{0, 7, 21}, this->up, 60));
     }
 
   this->currIterator = v_keyframe_.begin();
   this->nextIterator = v_keyframe_.begin();
-  //std::advance(this->nextIterator, 1);
 
   ++this->nextIterator;
-  //std::cout << this->v_keyframe_[0]->viewMatrix_[0].y << '\n';
 
   float fowInRad = (ppgso::PI/180.0f) * fow;
 
@@ -119,14 +89,8 @@ Camera::Camera(float fow, float ratio, float near, float far, const bool firstSc
  * Update Camera viewMatrix based on up, position and back vectors
  */
 bool Camera::update(float dt) {
-    //if (position.z < -10)
-    //this->position += this->speed * dt;
-    //if (this->keyframe_->index < this->keyframe_->points.size())
-    //    this->position += this->keyframe_->points[this->keyframe_->index++] * dt;
-
-    //dt /= 100;
     this->age += dt;
-    //this->viewMatrix = lookAt(this->position, this->position - this->back + this->rotation, this->up);//this->position - this->back + this->rotation, this->up);
+
     auto currentKeyFrame = this->currIterator->get();
     auto nextKeyFrame = this->nextIterator->get();
 
@@ -145,7 +109,6 @@ bool Camera::update(float dt) {
     else
     {
         float t = ((this->age - currentKeyFrame->time_) / (nextKeyFrame->time_ - currentKeyFrame->time_));
-        //t /= 10;
 
         this->viewMatrix = currentKeyFrame->viewMatrix_;
         this->viewMatrix = glm::interpolate

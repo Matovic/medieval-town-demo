@@ -14,7 +14,6 @@ Carpet::Carpet()
     this->position = {1.f, 1.0f, 25.0f};
     this->rotation = {0.0f, 0.0f, ppgso::PI * 1.f};
     this->scale = {5.0f, 0.01f, 5.0f};
-    //this->cauldron = std::make_unique<CauldronNight>();
 
     // Initialize static resources if needed
     if (!this->shader) this->shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
@@ -44,6 +43,9 @@ bool Carpet::update(Scene &scene, float dt) {
 void Carpet::render(Scene &scene) {
     this->shader->use();
 
+    // Set bloom
+    this->shader->setUniform("bloom", true);
+
     // Set up materials
     shader->setUniform("material.ambient",glm::vec3(0.2f, 0.2f, 0.2f));
     shader->setUniform("material.diffuse", glm::vec3(5.0f, 5.0f, 5.0f));
@@ -56,15 +58,6 @@ void Carpet::render(Scene &scene) {
     size_t index = 0;
     for (auto& obj : scene.lights_)
     {
-        /*glm::vec3 lighColor;
-        lighColor.x = sin((glfwGetTime() + index) * 2.0f);
-        lighColor.y = sin((glfwGetTime() + index) * 0.7f);
-        lighColor.z = sin((glfwGetTime() + index) * 1.3f);
-
-        shader->setUniform("fluorescentColor", lighColor);
-
-        //obj->color = lighColor;
-        obj->lightColor_ = lighColor;*/
         shader->setUniform("lights[" + std::to_string(index) + "].direction", obj->lightDirection_);
         shader->setUniform("lights[" + std::to_string(index) + "].ambient", obj->ambient);
         shader->setUniform("lights[" + std::to_string(index) + "].diffuse", obj->diffuse);

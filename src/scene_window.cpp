@@ -78,10 +78,8 @@ void SceneWindow::initScene() {
     sun_light->speed = glm::vec3{.0f, .0f, 1.0f};
     sun_light->colorSpeed = glm::vec3{0.5f, 0.5f, 0.5f};
     sun_light->ambient = glm::vec3{0.08f, 0.08f, 0.08f};
-    sun_light->diffuse = glm::vec3{0.02f, 0.02f, 0.01f};
+    sun_light->diffuse = glm::vec3{0.2f, 0.2f, 0.1f};
     sun_light->specular = glm::vec3{0.01f, 0.01f, 0.01f};
-    //auto sun_obj = std::make_move_iterator<Light>(sun);
-    //this->scene_.objects_.push_back(sun);
     this->scene_.lights_.push_back(std::move(sun_light));
 
     auto sun_ = std::make_unique<Sun>();
@@ -283,26 +281,7 @@ void SceneWindow::initSceneNight() {
         this->scene_.objects_.push_back(std::move(lamp));
     }
 
-    // Add balls behind towers
-    /*for (int i = 0; i < 10; ++i)
-    {
-        glm::vec3 lightColor{0.05 + 0.10 * (sin(dt * 1.20)), 0.95 + 0.25 * (sin(dt * 1.20)), 0.05 + 0.25 * (sin(dt * 1.20))};
-        glm::vec3 colorSpeed{glm::linearRand(-1.0f, 1.0f), glm::linearRand(-1.0f, 1.0f), glm::linearRand(-1.0f, 1.0f)};
-        float x_rand = glm::linearRand(-30.0f, 30.0f);
-        float z_rand = glm::linearRand(40.0f, 70.0f);
-        float y_speed_rand = glm::linearRand(-1.0f, -0.1f);
-
-        auto lamp = std::make_unique<Sun>();
-        lamp->position = glm::vec3{x_rand, 25.0f, z_rand};
-        lamp->speed = {0.1f, y_speed_rand, 0.0f};//-0.981f, 0.0f};
-        lamp->color = lightColor;
-        lamp->scale *= 0.2f;
-        lamp->colorSpeed = colorSpeed;
-        this->scene_.objects_.push_back(std::move(lamp));
-    }*/
-
     // Add apple, cauldron & carpet with hierarchical transformations
-    //auto hierarchy = ;
     this->scene_.objects_.push_back(std::make_unique<AppleNight>());
 
     // add houses

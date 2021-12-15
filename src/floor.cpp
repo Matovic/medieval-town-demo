@@ -1,8 +1,3 @@
-//#include <glm/gtc/random.hpp>
-//#include "asteroid.h"
-//#include "projectile.h"
-//#include "explosion.h"
-
 #include "floor.h"
 
 #include <shaders/diffuse_vert_glsl.h>
@@ -47,15 +42,6 @@ void Floor::render(Scene &scene) {
     size_t index = 0;
     for (auto& obj : scene.lights_)
     {
-        /*glm::vec3 lighColor;
-        lighColor.x = sin((glfwGetTime() + index) * 2.0f);
-        lighColor.y = sin((glfwGetTime() + index) * 0.7f);
-        lighColor.z = sin((glfwGetTime() + index) * 1.3f);*/
-
-        //shader->setUniform("fluorescentColor", lighColor);
-
-        //obj->color = lighColor;
-        //obj->lightColor_ = lighColor;
         shader->setUniform("lights[" + std::to_string(index) + "].direction", obj->lightDirection_);
         shader->setUniform("lights[" + std::to_string(index) + "].ambient", obj->ambient);
         shader->setUniform("lights[" + std::to_string(index) + "].diffuse", obj->diffuse);
@@ -63,7 +49,6 @@ void Floor::render(Scene &scene) {
         shader->setUniform("lights[" + std::to_string(index) + "].color", obj->lightColor_);
         ++index;
     }
-
 
     // use camera
     this->shader->setUniform("ProjectionMatrix", scene.camera_->projectionMatrix);

@@ -1,8 +1,3 @@
-//#include <glm/gtc/random.hpp>
-//#include "asteroid.h"
-//#include "projectile.h"
-//#include "explosion.h"
-
 #include "tower.h"
 #include "light.h"
 #include <shaders/diffuse_vert_glsl.h>
@@ -40,17 +35,10 @@ bool Tower::update(Scene &scene, float dt) {
 void Tower::render(Scene &scene) {
   this->shader->use();
 
-    // Set up light
-    /*this->shader->setUniform("LightDirection", scene.lightDirection_);
-    this->shader->setUniform("lightColor", scene.lightColor_);
-    this->shader->setUniform("viewPos", scene.camera_->position);
-    this->shader->setUniform("ambientStrength", scene.ambientStrength_);
-    this->shader->setUniform("specularStrength", scene.specularStrength_);*/
-
     // Set up materials
-    shader->setUniform("material.ambient",glm::vec3(0.2f, 0.2f, 0.2f));
-    shader->setUniform("material.diffuse", glm::vec3(5.0f, 5.0f, 5.0f));
-    shader->setUniform("material.specular", glm::vec3(0.01f, 0.01f, 0.01f));
+    shader->setUniform("material.ambient",glm::vec3(0.02f, 0.02f, 0.01f));
+    shader->setUniform("material.diffuse", glm::vec3(1.5f, 1.8f, 1.5f));
+    shader->setUniform("material.specular", glm::vec3(0.1f, 0.1f, 0.1f));
     shader->setUniform("material.shininess", 0.5);
 
 
@@ -59,15 +47,6 @@ void Tower::render(Scene &scene) {
     size_t index = 0;
     for (auto& obj : scene.lights_)
     {
-        /*glm::vec3 lighColor;
-        lighColor.x = sin((glfwGetTime() + index) * 2.0f);
-        lighColor.y = sin((glfwGetTime() + index) * 0.7f);
-        lighColor.z = sin((glfwGetTime() + index) * 1.3f);
-
-        shader->setUniform("fluorescentColor", lighColor);
-
-        //obj->color = lighColor;
-        obj->lightColor_ = lighColor;*/
         shader->setUniform("lights[" + std::to_string(index) + "].direction", obj->lightDirection_);
         shader->setUniform("lights[" + std::to_string(index) + "].ambient", obj->ambient);
         shader->setUniform("lights[" + std::to_string(index) + "].diffuse", obj->diffuse);

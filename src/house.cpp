@@ -1,8 +1,3 @@
-//#include <glm/gtc/random.hpp>
-//#include "asteroid.h"
-//#include "projectile.h"
-//#include "explosion.h"
-
 #include "house.h"
 
 #include <shaders/diffuse_vert_glsl.h>
@@ -26,11 +21,6 @@ House::House() {
 }
 
 bool House::update(Scene &scene, float dt) {
-
-    // Rotate the object
-    // if (scene.camera_->position.z > -13 && scene.camera_->position.z < -1)
-    //   this->rotation += rotMomentum * dt;
-
     // Generate modelMatrix from position, rotation and scale
     generateModelMatrix();
 
@@ -52,15 +42,6 @@ void House::render(Scene &scene) {
     size_t index = 0;
     for (auto& obj : scene.lights_)
     {
-        /*glm::vec3 lighColor;
-        lighColor.x = sin((glfwGetTime() + index) * 2.0f);
-        lighColor.y = sin((glfwGetTime() + index) * 0.7f);
-        lighColor.z = sin((glfwGetTime() + index) * 1.3f);
-
-        shader->setUniform("fluorescentColor", lighColor);
-
-        //obj->color = lighColor;
-        obj->lightColor_ = lighColor;*/
         shader->setUniform("lights[" + std::to_string(index) + "].direction", obj->lightDirection_);
         shader->setUniform("lights[" + std::to_string(index) + "].ambient", obj->ambient);
         shader->setUniform("lights[" + std::to_string(index) + "].diffuse", obj->diffuse);

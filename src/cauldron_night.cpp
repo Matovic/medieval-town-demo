@@ -1,6 +1,4 @@
 #include "cauldron_night.h"
-//#include "explosion.h"
-//#include "fountain.h"
 #include <shaders/diffuse_vert_glsl.h>
 #include <shaders/diffuse_frag_glsl.h>
 #include <glm/glm.hpp>
@@ -53,7 +51,7 @@ void CauldronNight::render(Scene &scene) {
     shader->setUniform("material.ambient",glm::vec3(0.2125f, 0.1275f, 0.054f));
     shader->setUniform("material.diffuse", glm::vec3(0.714f, 0.4284f, 0.18144f));
     shader->setUniform("material.specular", glm::vec3(0.393548f, 0.271906f, 0.166721f));
-    shader->setUniform("material.shininess", 0.2f);
+    shader->setUniform("material.shininess", 0.75f);
 
 
     // Set up light
@@ -61,15 +59,6 @@ void CauldronNight::render(Scene &scene) {
     size_t index = 0;
     for (auto& obj : scene.lights_)
     {
-        /*glm::vec3 lighColor;
-        lighColor.x = sin((glfwGetTime() + index) * 2.0f);
-        lighColor.y = sin((glfwGetTime() + index) * 0.7f);
-        lighColor.z = sin((glfwGetTime() + index) * 1.3f);
-
-        shader->setUniform("fluorescentColor", lighColor);
-
-        //obj->color = lighColor;
-        obj->lightColor_ = lighColor;*/
         shader->setUniform("lights[" + std::to_string(index) + "].direction", obj->lightDirection_);
         shader->setUniform("lights[" + std::to_string(index) + "].ambient", obj->ambient);
         shader->setUniform("lights[" + std::to_string(index) + "].diffuse", obj->diffuse);
