@@ -4,8 +4,12 @@
 # except .gitignore file
 !.gitignore
 
-_*
+# ignore zip files
+*.zip
 
+# ignore build files
+_*
 cmake-build*
 
+# ignore user files for CMake
 CMakeLists.txt.*
