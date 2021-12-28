@@ -1,6 +1,6 @@
 # Medieval Town
 
-This repository contains Medieval Town demo written in C++14 using OpenGL and GLSL.
+This repository contains Medieval Town demo written in C++14 using OpenGL and GLSL. Video can be found [here](https://youtu.be/wXrDjuNYEWM).  
 
 ## Authors
  - [Erik Matovič](https://github.com/Matovic)
